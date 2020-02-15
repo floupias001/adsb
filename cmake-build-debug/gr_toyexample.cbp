@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="gr_toyexample"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\opt\;CMake Files\..\..\..\..\..\..\opt\local\;CMake Files\..\..\..\..\..\..\opt\local\share\;CMake Files\..\..\..\..\..\..\opt\local\share\cmake\;CMake Files\..\..\..\..\..\..\opt\local\share\cmake\uhd\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/Users/rtajan/Documents/Codes/Radio/gr-toyexample/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/rtajan/Documents/Codes/Radio/gr-toyexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/rtajan/Documents/Codes/Radio/gr-toyexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/rtajan/Documents/Codes/Radio/gr-toyexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/rtajan/Documents/Codes/Radio/gr-toyexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/Users/rtajan/Documents/Codes/Radio/gr-toyexample/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/rtajan/Documents/Codes/Radio/gr-toyexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/rtajan/Documents/Codes/Radio/gr-toyexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/rtajan/Documents/Codes/Radio/gr-toyexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/rtajan/Documents/Codes/Radio/gr-toyexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/Users/rtajan/Documents/Codes/Radio/gr-toyexample/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/rtajan/Documents/Codes/Radio/gr-toyexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/rtajan/Documents/Codes/Radio/gr-toyexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/rtajan/Documents/Codes/Radio/gr-toyexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/rtajan/Documents/Codes/Radio/gr-toyexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="gr_toyexample">
+				<Option output="/Users/rtajan/Documents/Codes/Radio/gr-toyexample/cmake-build-debug/gr_toyexample" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/rtajan/Documents/Codes/Radio/gr-toyexample/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/opt/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/rtajan/Documents/Codes/Radio/gr-toyexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 gr_toyexample"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/rtajan/Documents/Codes/Radio/gr-toyexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/rtajan/Documents/Codes/Radio/gr-toyexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/rtajan/Documents/Codes/Radio/gr-toyexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="gr_toyexample/fast">
+				<Option output="/Users/rtajan/Documents/Codes/Radio/gr-toyexample/cmake-build-debug/gr_toyexample" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/rtajan/Documents/Codes/Radio/gr-toyexample/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/opt/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/rtajan/Documents/Codes/Radio/gr-toyexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 gr_toyexample/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/rtajan/Documents/Codes/Radio/gr-toyexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/rtajan/Documents/Codes/Radio/gr-toyexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/rtajan/Documents/Codes/Radio/gr-toyexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/Users/rtajan/Documents/Codes/Radio/gr-toyexample/main.cpp">
+			<Option target="gr_toyexample"/>
+		</Unit>
+		<Unit filename="/Users/rtajan/Documents/Codes/Radio/gr-toyexample/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/Users/rtajan/Documents/Codes/Radio/gr-toyexample/../../../../../../opt/local/share/cmake/uhd/uhdConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\opt\local\share\cmake\uhd\"/>
+		</Unit>
+		<Unit filename="/Users/rtajan/Documents/Codes/Radio/gr-toyexample/../../../../../../opt/local/share/cmake/uhd/uhdConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\opt\local\share\cmake\uhd\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
