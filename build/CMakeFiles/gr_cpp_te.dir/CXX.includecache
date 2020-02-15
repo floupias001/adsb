@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/floupias/Téléchargements/gr-toyexample/gr-toyexample/main.cpp
+iostream
+-
+complex
+-
+uhd/usrp/multi_usrp.hpp
+-
+uhd.h
+-
+
