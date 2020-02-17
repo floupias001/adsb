@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/floupias/adsb_radio/avion.h
+/home/floupias/ADSB/adsb/avion.h
 iostream
 -
 cstdio
@@ -14,7 +14,7 @@ cstdio
 cstdlib
 -
 
-/home/floupias/adsb_radio/liste_avion.h
+/home/floupias/ADSB/adsb/liste_avion.h
 iostream
 -
 cstdio
@@ -24,9 +24,9 @@ cstdlib
 map
 -
 avion.h
-/home/floupias/adsb_radio/avion.h
+/home/floupias/ADSB/adsb/avion.h
 
-/home/floupias/adsb_radio/main.cpp
+/home/floupias/ADSB/adsb/main.cpp
 iostream
 -
 complex
@@ -62,7 +62,7 @@ complex
 immintrin.h
 -
 liste_avion.h
-/home/floupias/adsb_radio/liste_avion.h
+/home/floupias/ADSB/adsb/liste_avion.h
 uhd/usrp/multi_usrp.hpp
 -
 uhd.h

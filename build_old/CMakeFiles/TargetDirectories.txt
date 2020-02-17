@@ -1,3 +1,0 @@
-/Users/rtajan/Documents/Codes/Radio/gr-toyexample/build/CMakeFiles/rebuild_cache.dir
-/Users/rtajan/Documents/Codes/Radio/gr-toyexample/build/CMakeFiles/edit_cache.dir
-/Users/rtajan/Documents/Codes/Radio/gr-toyexample/build/CMakeFiles/gr_cpp_te.dir

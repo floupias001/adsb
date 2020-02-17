@@ -242,6 +242,7 @@ int main(int argc, char* argv[])
 	auto N = 200000;
 	auto Np = 100;
 
+	cout << "============ ADSB ============" << endl;
 	// ============== GETOPT ================
 	printf("%s",KRED);
 	while ((c = getopt_long(argc, argv, "n:s:vt",long_options, &option_index)) != -1) {
