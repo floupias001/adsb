@@ -13,15 +13,12 @@
 #include <unistd.h>
 #include <chrono>
 #include <getopt.h>
-#include <complex>
 #include <immintrin.h>
 
 #define PI 3.14159265359
 
 #include "liste_avion.h"  // qui inclut avion.h
-
-#include <uhd/usrp/multi_usrp.hpp>
-#include <uhd.h>
+#include "radio.h"
 
 using namespace std;
 
@@ -237,9 +234,7 @@ int main(int argc, char* argv[])
 	{NULL,      0,                 NULL, 0}
 	};
 	int option_index = 0;
-	auto fc = 1090e6;//radio
-	auto fe = 8e6;
-	auto N = 200000;
+
 	auto Np = 100;
 
 	cout << "============ ADSB ============" << endl;
@@ -259,7 +254,7 @@ int main(int argc, char* argv[])
 		            ps_min = atof(dopt);
 			    if ((ps_min > 1) || (ps_min < 0)){
 				 ps_min = 0.75;
-				 printf("ERREUR : --produit_scalaire ou -s compris entre 0 et 1");
+				 printf("erreur : --produit_scalaire ou -s compris entre 0 et 1");
 			    	cout <<" ==>  option produit_scalaire : "<< ps_min << endl;
 			    } else printf("%soption produit_scalaire : %f%s\n", KNRM, ps_min, KRED);
 			    break;
@@ -268,7 +263,7 @@ int main(int argc, char* argv[])
 		            Np = atoi(copt);
 			    if ((Np < 1)){
 				 Np = 100;
-				 printf("ERREUR : --Np ou -n est entier >1");
+				 printf("erreur : --Np ou -n est entier >1");
 			    	 cout <<" ==>  option Np : "<< Np << endl;
 			    } else printf("%soption Np : %d%s\n", KNRM, Np, KRED);
 
@@ -295,40 +290,18 @@ int main(int argc, char* argv[])
 	}
 	printf("%s",KNRM);
 	cout << endl;
-	printf("%s",KYEL);
-	// ================ RADIO =====================
-	std::string usrp_addr("type=b100");           // L'adresse de l'USRP est écrite en dur pour l'instant
-	uhd::usrp::multi_usrp::sptr usrp;              // Le pointeur vers l'USRP
-	usrp = uhd::usrp::multi_usrp::make(usrp_addr); // Initialisation de l'USRP
+	Radio* radio = new Radio();
+	radio->initialize(); 
+	cout << "Temps estimé : " << Np*5/200 << " s   soit " << (float)Np*5/200/60 << " min"<< endl << endl; 
 
-	usrp->set_rx_rate(fe);                         // Set de la fréquence d'échantillonnage
-	usrp->set_rx_freq(fc);                         // Set de la fréquence porteuse
-	//usrp->set_rx_subdev_spec(uhd::usrp::subdev_spec_t("AB:0"));
-	usrp->set_rx_antenna("RX2");
-
-	uhd::stream_args_t
-	stream_args("fc32");        // Type des données à échantillonner (ici complexes float 64 - 32 bits par voie)
-	uhd::rx_streamer::sptr rx_stream = usrp->get_rx_stream(stream_args); // Pointeur sur les data reçues
-
-
-	/*
-	 * Affichage de quelques paramètres
-	 */
-	cout << " " << string(50, '-') << endl;
-	usrp->issue_stream_cmd(uhd::stream_cmd_t::STREAM_MODE_START_CONTINUOUS);
-
-	cout << " Sampling Rate set to: " << usrp->get_rx_rate() << endl;
-	cout << " Central Frequency set to: " << usrp->get_rx_freq() << endl;
-	cout << " " << string(50, '-') << endl;
-	printf("%s%s Ecoute en cours ...\n", KYEL, KNRM);
+	printf("Ecoute en cours ...\n");
 
 	/*
      	* Démarrage de l'aquisition
      	*/
 	auto start = chrono::high_resolution_clock::now();
 
-	std::vector<std::complex<float>> buffer(N); // Notre buffer à nous dans le programme
-	uhd::rx_metadata_t md;                     // Des metadata
+	vector<complex<float> > buffer(200000); // Notre buffer à nous dans le programme
 	//rx_stream->recv(&buffer.at(0), 1, md);       // Récupere un échantillon (sinon il est nul)
 
 	for (int np = 0; np < Np; np++)
@@ -337,9 +310,7 @@ int main(int argc, char* argv[])
 		for (int i=1; i<10;i++) if ( np == i*(Np/10)) cout << endl << i << "0%" << endl;
 		if (verbose) cout << endl <<   "======== np = " << np <<" =========" << endl;
 		// ============== RECEPTION ==================
-		int num_rx_samps = 0;                     // Nombre d'echantillons reçus
-		while (num_rx_samps < buffer.size())
-			num_rx_samps += rx_stream->recv(&buffer.at(num_rx_samps), N - num_rx_samps, md);
+		radio->reception(&buffer);
 		//cout << num_rx_samps << endl; 
 		nbtrame = 0;
 		adsb = 0;
@@ -677,9 +648,7 @@ int main(int argc, char* argv[])
        		typedef typename ratio_multiply<P,giga>::type TT;
        		cout << fixed << double(TT::num)/TT::den << " ns" << endl;
     	}
+	radio->reset();
 
-	usrp->issue_stream_cmd(uhd::stream_cmd_t::STREAM_MODE_STOP_CONTINUOUS);
-	rx_stream.reset();
-	usrp.reset();
 	return 0;
 }

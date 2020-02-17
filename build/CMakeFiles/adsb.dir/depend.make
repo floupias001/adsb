@@ -4,4 +4,5 @@
 CMakeFiles/adsb.dir/main.cpp.o: ../avion.h
 CMakeFiles/adsb.dir/main.cpp.o: ../liste_avion.h
 CMakeFiles/adsb.dir/main.cpp.o: ../main.cpp
+CMakeFiles/adsb.dir/main.cpp.o: ../radio.h
 
