@@ -138,7 +138,7 @@ CMAKE_OBJCOPY:FILEPATH=/usr/bin/objcopy
 CMAKE_OBJDUMP:FILEPATH=/usr/bin/objdump
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=gr_cpp_te
+CMAKE_PROJECT_NAME:STATIC=adsb
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/usr/bin/ranlib
@@ -200,6 +200,12 @@ UHD_INCLUDE_DIRS:PATH=/usr/include
 
 //Path to a library.
 UHD_LIBRARIES:FILEPATH=/usr/lib/x86_64-linux-gnu/libuhd.so
+
+//Value Computed by CMake
+adsb_BINARY_DIR:STATIC=/home/floupias/ADSB/adsb/build
+
+//Value Computed by CMake
+adsb_SOURCE_DIR:STATIC=/home/floupias/ADSB/adsb
 
 //Value Computed by CMake
 gr_cpp_te_BINARY_DIR:STATIC=/home/floupias/ADSB/adsb/build

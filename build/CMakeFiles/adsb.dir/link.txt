@@ -1,0 +1,1 @@
+/usr/bin/c++   -mavx -mavx2 -O3   CMakeFiles/adsb.dir/main.cpp.o  -o adsb /usr/lib/x86_64-linux-gnu/libuhd.so /usr/lib/x86_64-linux-gnu/libboost_filesystem.so /usr/lib/x86_64-linux-gnu/libboost_system.so 
