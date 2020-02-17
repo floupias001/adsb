@@ -1,3 +1,6 @@
+#ifndef LISTE_AVION
+#define LISTE_AVION
+
 #include <iostream>
 #include <cstdio>
 #include <cstdlib>
@@ -63,3 +66,4 @@ void Liste_Avion::print(){
 	}
 }
 
+#endif

@@ -1,3 +1,8 @@
+
+#ifndef AVION
+#define AVION
+
+
 #include <iostream>
 #include <cstdio>
 #include <cstdlib>
@@ -101,3 +106,4 @@ void Avion::print(){
 	cout << endl << endl;
 }
 
+#endif 

@@ -6,12 +6,48 @@
 
 #IncludeRegexTransform: 
 
+/home/floupias/ADSB/adsb/abs.h
+iostream
+-
+cstdio
+-
+cstdlib
+-
+complex
+-
+immintrin.h
+-
+chrono
+-
+
 /home/floupias/ADSB/adsb/avion.h
 iostream
 -
 cstdio
 -
 cstdlib
+-
+
+/home/floupias/ADSB/adsb/decodage.h
+iostream
+-
+cstdio
+-
+cstdlib
+-
+immintrin.h
+-
+liste_avion.h
+/home/floupias/ADSB/adsb/liste_avion.h
+
+/home/floupias/ADSB/adsb/detecteur.h
+iostream
+-
+cstdio
+-
+cstdlib
+-
+immintrin.h
 -
 
 /home/floupias/ADSB/adsb/liste_avion.h
@@ -63,6 +99,12 @@ liste_avion.h
 /home/floupias/ADSB/adsb/liste_avion.h
 radio.h
 /home/floupias/ADSB/adsb/radio.h
+detecteur.h
+/home/floupias/ADSB/adsb/detecteur.h
+decodage.h
+/home/floupias/ADSB/adsb/decodage.h
+abs.h
+/home/floupias/ADSB/adsb/abs.h
 
 /home/floupias/ADSB/adsb/radio.h
 iostream

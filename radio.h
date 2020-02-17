@@ -21,10 +21,10 @@ using namespace std;
 class Radio{
 
 private :
-	float fc = 1090e6;//radio
-	float fe = 8e6;
+	float fc;
+	float fe;
 	uhd::usrp::multi_usrp::sptr usrp;              // Le pointeur vers l'USRP
-    int N = 200000;  //N = 200000 => 50 ms ?
+    int N;  //nbre ech
     uhd::rx_streamer::sptr rx_stream;
 
 public :
@@ -36,7 +36,9 @@ public :
 };
 
 Radio::Radio(){
-
+    fc = 1090e6;
+    fe = 8e6;
+    N = 200000; //N = 200000 => 50 ms ?
 }
 
 Radio::~Radio(){}
