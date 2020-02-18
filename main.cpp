@@ -29,13 +29,10 @@ using namespace std;
 /*   ============================== GET NUM =========================== */
 int getnum(char* line, char** real, char** img)
 {
-	//cout << i << endl;
-    	*real = strtok(line, " \n");
+    *real = strtok(line, " \n");
 	if(*real == NULL) *real = "0";
-	//cout << "real :" << real[i] << endl;
 	*img = strtok(NULL, "\n");
 	if (*img == NULL) *img = "0";
-	//if (img[i] != NULL) cout << "imag :" << img[i] << endl;
 	return 0;
 }			
 
@@ -47,12 +44,12 @@ int main(int argc, char* argv[])
 	char* buffer_imag;
 	//4 ech = 1symb , correspond à 1s
 	int trame[120]; //1 trame = 120 symb = 480 ech
-	float ps = 0; //produit scalaire
     char line[1024];
 	float breal = 0.0;
 	float bimag = 0.0;
 	Liste_Avion *liste_avion;
 	liste_avion = new Liste_Avion();
+
 	int nbtrame = 0; // nbre elmt/trame/...
 	int nbtrametotal = 0; // nbre elmt/trame/...
 	int adsbtotal = 0;
@@ -62,15 +59,16 @@ int main(int argc, char* argv[])
 	int bonftc = 0;
 	int boncrc = 0;
 	int nouvel = 0;
+
 	int c; //getopt
 	int verbose = 0;
 	int aff_trame = 0;
 	char* nom_fichier = "buffers_test.c";
 	int fichier = 0;
 	int digit_optind = 0;
-	int aopt = 0, bopt = 0;
-	char *copt = 0, *dopt = 0;
 	float ps_min = 0.75;
+	int Np = 100;
+
 	static struct option long_options[] = {
 	/*   NAME       ARGUMENT           FLAG  SHORTNAME */
 	{"verbose", no_argument,       NULL, 'v'},  		// affiche beaucoup de trucs pas tres utiles
@@ -81,11 +79,11 @@ int main(int argc, char* argv[])
 	{NULL,      0,                 NULL, 0}
 	};
 	int option_index = 0;
+
 	Detecteur* detecteur = new Detecteur();
 	Radio* radio = new Radio();
 	vector<complex<float> > buffer(200000); // Notre buffer à nous dans le programme
 	vector<complex<float> > buffer_fichier;
-	auto Np = 100;
 
 	cout << "============ ADSB ============" << endl;
 	// ============== GETOPT ================
@@ -100,8 +98,7 @@ int main(int argc, char* argv[])
 			    printf ("\n");
 			    break;
 			case 's':
-			    dopt = optarg;
-		            ps_min = atof(dopt);
+		        ps_min = atof(optarg);
 			    if ((ps_min > 1) || (ps_min < 0)){
 				 ps_min = 0.75;
 				 printf("erreur : --produit_scalaire ou -s compris entre 0 et 1");
@@ -109,8 +106,7 @@ int main(int argc, char* argv[])
 			    } else printf("%soption produit_scalaire : %f%s\n", KNRM, ps_min, KRED);
 			    break;
 			case 'n':
-			    copt = optarg;
-		            Np = atoi(copt);
+		        Np = atoi(optarg);
 			    if ((Np < 1)){
 				 Np = 100;
 				 printf("erreur : --Np ou -n est entier >1");
@@ -151,13 +147,12 @@ int main(int argc, char* argv[])
 
 
 	//=============== INITIALISATION RADIO ================
-	if (!fichier) radio->initialize(); 
-
-	if (!fichier) cout << "Temps estimé : " << Np*5/200 << " s   soit " << (float)Np*5/200/60 << " min"<< endl << endl; 
-
-	if (!fichier) printf("Ecoute en cours ...\n");
-
-	//======================== FICHIER =====================
+	if (!fichier){
+		radio->initialize(); 
+		cout << "Temps estimé : " << Np*5/200 << " s   soit " << (float)Np*5/200/60 << " min"<< endl << endl; 
+		printf("Ecoute en cours ...\n");
+	}
+	//=============== INITIALISATION FICHIER ================
 	if (fichier){
 		FILE* stream;
 		 stream = fopen(nom_fichier, "r");
@@ -180,13 +175,13 @@ int main(int argc, char* argv[])
 	}
 
 
-
 	auto start = chrono::high_resolution_clock::now();
 
 
 	for (int np = 0; np < Np; np++)
 	{
 		auto np1 = chrono::high_resolution_clock::now();
+
 		if (!fichier) for (int i=1; i<10;i++) if ( np == i*(Np/10)) cout << endl << i << "0%" << endl;
 		if (verbose) cout << endl <<   "======== np = " << np <<" =========" << endl;
 		// ============== RECEPTION RADIO ==================
@@ -197,16 +192,20 @@ int main(int argc, char* argv[])
 		bonftc = 0;
 		vector<float> buffer_abs; 
 
-		// =============== TRAITEMENT =================
+		// =============== TRAITEMENT ================
+
 		// =============== cplx => abs() ==============
 		if (fichier) cplx2abs(verbose, &buffer_fichier, &buffer_abs);
 		else cplx2abs(verbose, &buffer, &buffer_abs);
+
 		// ============== detection & decodage ================
 		int k=0;
 		while ( k <= (buffer_abs.size() - 480)){ //480 = taille trame (ech)
 			float s;
 			float* addr = buffer_abs.data() + k;
+
 			s = detecteur->detection(addr);
+
 			if (s > ps_min){ 
 		
 				// -------- on a une trame : ech --------------
@@ -217,11 +216,10 @@ int main(int argc, char* argv[])
 				}
 
 				// --------- on a une trame demodulee : symb ------------
-
 				if ((trame[8] == 1) &&  (trame[9] == 0) && (trame[10] == 0) && (trame[11] == 0) && (trame[12] == 1)){
-					k+=479;
+
 					// -------------- on a une trame ads-b -----------------
-					
+					k+=479;
 					Decodage* decode = new Decodage();
 					decode->decodage(nouvel, s, verbose, aff_trame, trame, liste_avion);
 					adsb ++;
@@ -236,6 +234,7 @@ int main(int argc, char* argv[])
 		}
 
 		auto np2 = chrono::high_resolution_clock::now();
+
 		if (verbose) {
 			cout << endl <<  "Temps np :" << chrono::duration_cast<chrono::microseconds>(np2 - np1).count() << "us"<< endl;
 			cout << "\nnombre de trames : "<< nbtrame << endl;
@@ -256,11 +255,11 @@ int main(int argc, char* argv[])
 
 	// =============== AFFICHAGE FINAL =====================
 	printf("\n================================================================\n");
+	
 	cout << "liste des avions :" << endl;
-
 	(*liste_avion).print();
-	auto end = chrono::high_resolution_clock::now();
 
+	auto end = chrono::high_resolution_clock::now();
 
 	cout << "\nnombre total de trames : "<< nbtrametotal << endl;
 	cout << "\nnombre total de trames ads-b : "<< adsbtotal << endl;
