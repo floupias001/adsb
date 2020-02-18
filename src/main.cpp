@@ -18,6 +18,7 @@
 #include "liste_avion.h"  // qui inclut avion.h
 #include "radio.h"
 #include "detecteur.h"
+#include "detecteur8par8.h"
 #include "decodage.h"
 #include "abs.h"
 #include "couleur.h"
@@ -68,18 +69,21 @@ int main(int argc, char* argv[])
 	int digit_optind = 0;
 	float ps_min = 0.75;
 	int Np = 100;
+	int huit = 0;
 	static struct option long_options[] = {
 	/*   NAME       ARGUMENT           FLAG  SHORTNAME */
 	{"verbose", no_argument,       NULL, 'v'},  		// affiche temps sur chaque boucle Np + cplx => abs
 	{"trame", no_argument,       NULL, 't'},   		// affiche toutes les trames adsb reçues
 	{"produit_scalaire",    required_argument, NULL, 's'}, 	// pour changer la valeur min de la correlation (synchro)
 	{"np",    required_argument, NULL, 'n'}, 		// pour changer le nombre de boucle Np (ie nbre echantillon*200000) // Np = 10 => 0.5 s ?
+	{"huit", no_argument, NULL, '8'},  // detecteur8par8
 	{"fichier", required_argument,     NULL, 'f'},
 	{NULL,      0,                 NULL, 0}
 	};
 	int option_index = 0;
 
 	Detecteur* detecteur = new Detecteur();
+	Detecteur8par8* detecteur8par8 = new Detecteur8par8();
 	Radio* radio = new Radio();
 	vector<complex<float> > buffer(200000); // Notre buffer à nous dans le programme
 	vector<complex<float> > buffer_fichier;
@@ -87,7 +91,7 @@ int main(int argc, char* argv[])
 	cout << "==================================== ADSB ====================================" << endl;
 	// ============== GETOPT ================
 	printf("%s",KRED);
-	while ((c = getopt_long(argc, argv, "f:n:s:vt",long_options, &option_index)) != -1) {
+	while ((c = getopt_long(argc, argv, "f:n:s:vt8",long_options, &option_index)) != -1) {
 		int this_option_optind = optind ? optind : 1;
 		switch (c) {
 			case 0:
@@ -125,6 +129,9 @@ int main(int argc, char* argv[])
 				nom_fichier = optarg;
 				printf("%soption fichier :%s%s\n",KNRM, nom_fichier, KRED);
 			    break;
+			case '8' :
+				huit = 1;
+				printf("%soption huit%s\n",KNRM, KRED);
 			case '?':
 			    break;
 			default:
@@ -199,34 +206,62 @@ int main(int argc, char* argv[])
 		// ============== detection & decodage ================
 		int k=0;
 		while ( k <= (buffer_abs.size() - 480)){ //480 = taille trame (ech)
+			//cout << "k :" << k << endl;
 			float s;
 			float* addr = buffer_abs.data() + k;
 
-			s = detecteur->detection(addr);
+			if (!huit){
+				s = detecteur->detection(addr);
+				if (s > ps_min){ 
+					// -------- on a une trame : ech --------------
+					for (int j=0; j < 480; j = j+4){
+						if ((buffer_abs[k + j] + buffer_abs[k + j +1]) >= (buffer_abs[k + j +2] + buffer_abs[k + j +3])){
+							trame[j/4] = 1;	
+						} else {trame[j/4] = 0;}
+					}
 
-			if (s > ps_min){ 
-		
-				// -------- on a une trame : ech --------------
-				for (int j=0; j < 480; j = j+4){
-					if ((buffer_abs[k + j] + buffer_abs[k + j +1]) >= (buffer_abs[k + j +2] + buffer_abs[k + j +3])){
-						trame[j/4] = 1;	
-					} else {trame[j/4] = 0;}
+					// --------- on a une trame demodulee : symb ------------
+					if ((trame[8] == 1) &&  (trame[9] == 0) && (trame[10] == 0) && (trame[11] == 0) && (trame[12] == 1)){
+						// -------------- on a une trame ads-b -----------------
+						k+=479;
+						Decodage* decode = new Decodage();
+						decode->decodage(s, aff_trame, trame, liste_avion);
+						adsb ++;
+						bonftc += decode->get_bonftc();
+						boncrc += decode->get_boncrc();
+					}
+
+					nbtrame++;
+					nbtrametotal++;	
 				}
+			} else {
+				__attribute__ ((aligned (16))) float s8[8];
+				detecteur8par8->detection(s8, addr);
+				for (int kk=0; kk < 8; kk++){
+					if (*(s8 + kk) > ps_min){ 
+						// -------- on a une trame : ech --------------
+						for (int j=0; j < 480; j = j+4){
+							if ((buffer_abs[k + kk + j] + buffer_abs[k + kk + j +1]) >= (buffer_abs[k + kk + j +2] + buffer_abs[k + kk + j +3])){
+								trame[j/4] = 1;	
+							} else {trame[j/4] = 0;}
+						}
+						// --------- on a une trame demodulee : symb ------------
+						if ((trame[8] == 1) &&  (trame[9] == 0) && (trame[10] == 0) && (trame[11] == 0) && (trame[12] == 1)){
+							// -------------- on a une trame ads-b -----------------
+							Decodage* decode = new Decodage();
+							decode->decodage(*(s8 + kk), aff_trame, trame, liste_avion);
+							k+=471;
+							kk = 8;
+							adsb ++;
+							bonftc += decode->get_bonftc();
+							boncrc += decode->get_boncrc();
+						}
 
-				// --------- on a une trame demodulee : symb ------------
-				if ((trame[8] == 1) &&  (trame[9] == 0) && (trame[10] == 0) && (trame[11] == 0) && (trame[12] == 1)){
-
-					// -------------- on a une trame ads-b -----------------
-					k+=479;
-					Decodage* decode = new Decodage();
-					decode->decodage(s, aff_trame, trame, liste_avion);
-					adsb ++;
-					bonftc += decode->get_bonftc();
-					boncrc += decode->get_boncrc();
+						nbtrame++;
+						nbtrametotal++;	
+					}
 				}
-
-				nbtrame++;
-				nbtrametotal++;	
+				k +=8;
 			}
 			k++;
 		}

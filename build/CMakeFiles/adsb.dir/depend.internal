@@ -7,6 +7,7 @@ CMakeFiles/adsb.dir/src/main.cpp.o
  /home/floupias/ADSB/adsb/src/couleur.h
  /home/floupias/ADSB/adsb/src/decodage.h
  /home/floupias/ADSB/adsb/src/detecteur.h
+ /home/floupias/ADSB/adsb/src/detecteur8par8.h
  /home/floupias/ADSB/adsb/src/liste_avion.h
  /home/floupias/ADSB/adsb/src/main.cpp
  /home/floupias/ADSB/adsb/src/radio.h

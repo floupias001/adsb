@@ -120,7 +120,7 @@ private :
 public :
 	Decodage();
 	~Decodage();
-    float decodage(float s, int aff_trame, int trame[120], Liste_Avion* liste_avion);
+    void decodage(float s, int aff_trame, int trame[120], Liste_Avion* liste_avion);
     int get_bonftc();
     int get_boncrc();
 };
@@ -131,6 +131,7 @@ Decodage::Decodage(){
     ftc = 0;
     latitude = 0;
     longitude = 0;
+    altitude = 0;
     nouvel = 0;
     oaci = 0;
 }
@@ -145,7 +146,7 @@ int Decodage::get_boncrc(){
     return  boncrc;
 }
 
-float Decodage::decodage(float s, int aff_trame, int trame[120], Liste_Avion* liste_avion){
+void Decodage::decodage(float s, int aff_trame, int trame[120], Liste_Avion* liste_avion){
 	Avion *plane = new Avion(0);
     // -------------- on a une trame ads-b -----------------
 

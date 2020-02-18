@@ -60,6 +60,16 @@ cstdlib
 immintrin.h
 -
 
+/home/floupias/ADSB/adsb/src/detecteur8par8.h
+iostream
+-
+cstdio
+-
+cstdlib
+-
+immintrin.h
+-
+
 /home/floupias/ADSB/adsb/src/liste_avion.h
 iostream
 -
@@ -111,6 +121,8 @@ radio.h
 /home/floupias/ADSB/adsb/src/radio.h
 detecteur.h
 /home/floupias/ADSB/adsb/src/detecteur.h
+detecteur8par8.h
+/home/floupias/ADSB/adsb/src/detecteur8par8.h
 decodage.h
 /home/floupias/ADSB/adsb/src/decodage.h
 abs.h
