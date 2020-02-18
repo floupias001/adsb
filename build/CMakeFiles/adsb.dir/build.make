@@ -57,38 +57,38 @@ include CMakeFiles/adsb.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/adsb.dir/flags.make
 
-CMakeFiles/adsb.dir/main.cpp.o: CMakeFiles/adsb.dir/flags.make
-CMakeFiles/adsb.dir/main.cpp.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/floupias/ADSB/adsb/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/adsb.dir/main.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/adsb.dir/main.cpp.o -c /home/floupias/ADSB/adsb/main.cpp
+CMakeFiles/adsb.dir/src/main.cpp.o: CMakeFiles/adsb.dir/flags.make
+CMakeFiles/adsb.dir/src/main.cpp.o: ../src/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/floupias/ADSB/adsb/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/adsb.dir/src/main.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/adsb.dir/src/main.cpp.o -c /home/floupias/ADSB/adsb/src/main.cpp
 
-CMakeFiles/adsb.dir/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/adsb.dir/main.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/floupias/ADSB/adsb/main.cpp > CMakeFiles/adsb.dir/main.cpp.i
+CMakeFiles/adsb.dir/src/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/adsb.dir/src/main.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/floupias/ADSB/adsb/src/main.cpp > CMakeFiles/adsb.dir/src/main.cpp.i
 
-CMakeFiles/adsb.dir/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/adsb.dir/main.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/floupias/ADSB/adsb/main.cpp -o CMakeFiles/adsb.dir/main.cpp.s
+CMakeFiles/adsb.dir/src/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/adsb.dir/src/main.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/floupias/ADSB/adsb/src/main.cpp -o CMakeFiles/adsb.dir/src/main.cpp.s
 
-CMakeFiles/adsb.dir/main.cpp.o.requires:
+CMakeFiles/adsb.dir/src/main.cpp.o.requires:
 
-.PHONY : CMakeFiles/adsb.dir/main.cpp.o.requires
+.PHONY : CMakeFiles/adsb.dir/src/main.cpp.o.requires
 
-CMakeFiles/adsb.dir/main.cpp.o.provides: CMakeFiles/adsb.dir/main.cpp.o.requires
-	$(MAKE) -f CMakeFiles/adsb.dir/build.make CMakeFiles/adsb.dir/main.cpp.o.provides.build
-.PHONY : CMakeFiles/adsb.dir/main.cpp.o.provides
+CMakeFiles/adsb.dir/src/main.cpp.o.provides: CMakeFiles/adsb.dir/src/main.cpp.o.requires
+	$(MAKE) -f CMakeFiles/adsb.dir/build.make CMakeFiles/adsb.dir/src/main.cpp.o.provides.build
+.PHONY : CMakeFiles/adsb.dir/src/main.cpp.o.provides
 
-CMakeFiles/adsb.dir/main.cpp.o.provides.build: CMakeFiles/adsb.dir/main.cpp.o
+CMakeFiles/adsb.dir/src/main.cpp.o.provides.build: CMakeFiles/adsb.dir/src/main.cpp.o
 
 
 # Object files for target adsb
 adsb_OBJECTS = \
-"CMakeFiles/adsb.dir/main.cpp.o"
+"CMakeFiles/adsb.dir/src/main.cpp.o"
 
 # External object files for target adsb
 adsb_EXTERNAL_OBJECTS =
 
-adsb: CMakeFiles/adsb.dir/main.cpp.o
+adsb: CMakeFiles/adsb.dir/src/main.cpp.o
 adsb: CMakeFiles/adsb.dir/build.make
 adsb: /usr/lib/x86_64-linux-gnu/libuhd.so
 adsb: /usr/lib/x86_64-linux-gnu/libboost_filesystem.so
@@ -102,7 +102,7 @@ CMakeFiles/adsb.dir/build: adsb
 
 .PHONY : CMakeFiles/adsb.dir/build
 
-CMakeFiles/adsb.dir/requires: CMakeFiles/adsb.dir/main.cpp.o.requires
+CMakeFiles/adsb.dir/requires: CMakeFiles/adsb.dir/src/main.cpp.o.requires
 
 .PHONY : CMakeFiles/adsb.dir/requires
 

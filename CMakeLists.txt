@@ -11,7 +11,7 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_FLAGS "-mavx -mavx2 -O3")
 
 set(SOURCE_FILES
-        main.cpp)
+        src/main.cpp)
 
 add_executable(adsb ${SOURCE_FILES})
 

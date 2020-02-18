@@ -5,6 +5,7 @@
 #include "liste_avion.h"
 #include "couleur.h"
 
+#define PI 3.14159265359
 
 using namespace std;
 
@@ -105,18 +106,18 @@ class Decodage{
 private :
     int bonftc;
     int boncrc;
-	int oaci = 0;
-	int ftc = 0;
-	int altitude = 0;
-	float latitude = 0;
-	float longitude = 0;
-    int nouvel = 0;
+	int oaci;
+	int ftc;
+	int altitude;
+	float latitude;
+	float longitude;
+    int nouvel;
 	int caractere[8];
 
 public :
 	Decodage();
 	~Decodage();
-    float decodage(int nouvel, float s, int verbose, int aff_trame, int trame[120], Liste_Avion* liste_avion);
+    float decodage(int nouvel, float s, int aff_trame, int trame[120], Liste_Avion* liste_avion);
     int get_bonftc();
     int get_boncrc();
 };
@@ -124,6 +125,11 @@ public :
 Decodage::Decodage(){
     bonftc = 0;
     boncrc = 0;
+    ftc = 0;
+    latitude = 0;
+    longitude = 0;
+    nouvel = 0;
+    oaci = 0;
 }
 
 Decodage::~Decodage(){}
@@ -136,7 +142,7 @@ int Decodage::get_boncrc(){
     return  boncrc;
 }
 
-float Decodage::decodage(int nouvel, float s, int verbose, int aff_trame, int trame[120], Liste_Avion* liste_avion){
+float Decodage::decodage(int nouvel, float s, int aff_trame, int trame[120], Liste_Avion* liste_avion){
 	Avion *plane = new Avion(0);
     // -------------- on a une trame ads-b -----------------
 
@@ -166,9 +172,9 @@ float Decodage::decodage(int nouvel, float s, int verbose, int aff_trame, int tr
         nouvel = (*liste_avion).search(oaci);
         if (nouvel == -1) {
             plane = new Avion(oaci);
-            if (verbose) cout << "NOUVEL AVION" << "    ";
+            if (aff_trame) cout << "NOUVEL AVION" << "    ";
         } else {
-            if (verbose) cout << "                ";
+            if (aff_trame) cout << "                ";
             *plane = (*liste_avion).find(nouvel);
         }
         //calcul ftc

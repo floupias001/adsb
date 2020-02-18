@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/adsb.dir/main.cpp.o"
+  "CMakeFiles/adsb.dir/src/main.cpp.o"
   "adsb.pdb"
   "adsb"
 )

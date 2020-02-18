@@ -15,8 +15,6 @@
 #include <getopt.h>
 #include <immintrin.h>
 
-#define PI 3.14159265359
-
 #include "liste_avion.h"  // qui inclut avion.h
 #include "radio.h"
 #include "detecteur.h"
@@ -71,7 +69,7 @@ int main(int argc, char* argv[])
 
 	static struct option long_options[] = {
 	/*   NAME       ARGUMENT           FLAG  SHORTNAME */
-	{"verbose", no_argument,       NULL, 'v'},  		// affiche beaucoup de trucs pas tres utiles
+	{"verbose", no_argument,       NULL, 'v'},  		// affiche temps sur chaque boucle Np + cplx => abs
 	{"trame", no_argument,       NULL, 't'},   		// affiche toutes les trames adsb reçues
 	{"produit_scalaire",    required_argument, NULL, 's'}, 	// pour changer la valeur min de la correlation (synchro)
 	{"np",    required_argument, NULL, 'n'}, 		// pour changer le nombre de boucle Np (ie nbre echantillon*200000) // Np = 10 => 0.5 s ?
@@ -125,7 +123,6 @@ int main(int argc, char* argv[])
 			case 'f':
 			    fichier = 1;
 				nom_fichier = optarg;
-				Np = 1;
 				printf("%soption fichier :%s%s\n",KNRM, nom_fichier, KRED);
 			    break;
 			case '?':
@@ -154,6 +151,7 @@ int main(int argc, char* argv[])
 	}
 	//=============== INITIALISATION FICHIER ================
 	if (fichier){
+		Np = 1;
 		FILE* stream;
 		 stream = fopen(nom_fichier, "r");
 		if (stream == NULL){
@@ -182,19 +180,17 @@ int main(int argc, char* argv[])
 	{
 		auto np1 = chrono::high_resolution_clock::now();
 
-		if (!fichier) for (int i=1; i<10;i++) if ( np == i*(Np/10)) cout << endl << i << "0%" << endl;
-		if (verbose) cout << endl <<   "======== np = " << np <<" =========" << endl;
+		if (!fichier){
+			for (int i=1; i<10;i++) if ( np == i*(Np/10)) cout << endl << i << "0%" << endl;
+			if (verbose) cout << endl <<   "======== np = " << np <<" =========" << endl;
+		}
 		// ============== RECEPTION RADIO ==================
 		if (!fichier) radio->reception(&buffer);
-
-		nbtrame = 0;
-		adsb = 0;
-		bonftc = 0;
-		vector<float> buffer_abs; 
 
 		// =============== TRAITEMENT ================
 
 		// =============== cplx => abs() ==============
+		vector<float> buffer_abs; 
 		if (fichier) cplx2abs(verbose, &buffer_fichier, &buffer_abs);
 		else cplx2abs(verbose, &buffer, &buffer_abs);
 
@@ -221,7 +217,7 @@ int main(int argc, char* argv[])
 					// -------------- on a une trame ads-b -----------------
 					k+=479;
 					Decodage* decode = new Decodage();
-					decode->decodage(nouvel, s, verbose, aff_trame, trame, liste_avion);
+					decode->decodage(nouvel, s, aff_trame, trame, liste_avion);
 					adsb ++;
 					bonftc += decode->get_bonftc();
 					boncrc += decode->get_boncrc();
@@ -235,7 +231,7 @@ int main(int argc, char* argv[])
 
 		auto np2 = chrono::high_resolution_clock::now();
 
-		if (verbose) {
+		if (verbose && !fichier) {
 			cout << endl <<  "Temps np :" << chrono::duration_cast<chrono::microseconds>(np2 - np1).count() << "us"<< endl;
 			cout << "\nnombre de trames : "<< nbtrame << endl;
 			cout << "\nnombre de trames ads-b : "<< adsb << endl;
@@ -255,7 +251,7 @@ int main(int argc, char* argv[])
 
 	// =============== AFFICHAGE FINAL =====================
 	printf("\n================================================================\n");
-	
+
 	cout << "liste des avions :" << endl;
 	(*liste_avion).print();
 
