@@ -68,7 +68,6 @@ int main(int argc, char* argv[])
 	int digit_optind = 0;
 	float ps_min = 0.75;
 	int Np = 100;
-
 	static struct option long_options[] = {
 	/*   NAME       ARGUMENT           FLAG  SHORTNAME */
 	{"verbose", no_argument,       NULL, 'v'},  		// affiche temps sur chaque boucle Np + cplx => abs
@@ -185,7 +184,7 @@ int main(int argc, char* argv[])
 
 		if (!fichier){
 			for (int i=1; i<10;i++) if ( np == i*(Np/10)) cout << endl << i << "0%" << endl;
-			if (verbose) cout << endl <<   "======== np = " << np <<" =========" << endl;
+			if (verbose) cout << endl <<   "======== np = " << np <<" ========" << endl;
 		}
 		// ============== RECEPTION RADIO ==================
 		if (!fichier) radio->reception(&buffer);
