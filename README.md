@@ -1,9 +1,9 @@
 # adsb
 
-cd /build \n
-cmake .. \n
-make \n
-./adsb <options> \n
+cd /build   
+cmake ..    
+make    
+./adsb <options>    
 
 options : -f --fichier "nom-fichier"
           -n --np <int>
