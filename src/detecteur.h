@@ -1,3 +1,6 @@
+#ifndef DETECTEUR
+#define DETECTEUR
+
 #include <iostream>
 #include <cstdio>
 #include <cstdlib>
@@ -62,3 +65,5 @@ float Detecteur::detection(float *buffer){
 	return (ps/sqrt(somme));
 
 }
+
+#endif

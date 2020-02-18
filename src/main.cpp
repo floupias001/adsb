@@ -36,27 +36,29 @@ int getnum(char* line, char** real, char** img)
 
 
 /*   ============================== MAIN =========================== */
+/*
+	4 ech = 1 symb
+	1 trame = 120 symb = 480 ech
+*/
 int main(int argc, char* argv[])
 {
-	char* buffer_real; //a remplir avec .csv parse test2
+	char* buffer_real;
 	char* buffer_imag;
-	//4 ech = 1symb , correspond à 1s
-	int trame[120]; //1 trame = 120 symb = 480 ech
+	int trame[120];
     char line[1024];
 	float breal = 0.0;
 	float bimag = 0.0;
 	Liste_Avion *liste_avion;
 	liste_avion = new Liste_Avion();
 
-	int nbtrame = 0; // nbre elmt/trame/...
-	int nbtrametotal = 0; // nbre elmt/trame/...
+	int nbtrame = 0; // nbre trame ...
+	int nbtrametotal = 0;
 	int adsbtotal = 0;
 	int bonftctotal = 0;
 	int boncrctotal = 0;
 	int adsb = 0;
 	int bonftc = 0;
 	int boncrc = 0;
-	int nouvel = 0;
 
 	int c; //getopt
 	int verbose = 0;
@@ -83,7 +85,7 @@ int main(int argc, char* argv[])
 	vector<complex<float> > buffer(200000); // Notre buffer à nous dans le programme
 	vector<complex<float> > buffer_fichier;
 
-	cout << "============ ADSB ============" << endl;
+	cout << "==================================== ADSB ====================================" << endl;
 	// ============== GETOPT ================
 	printf("%s",KRED);
 	while ((c = getopt_long(argc, argv, "f:n:s:vt",long_options, &option_index)) != -1) {
@@ -110,7 +112,6 @@ int main(int argc, char* argv[])
 				 printf("erreur : --Np ou -n est entier >1");
 			    	 cout <<" ==>  option Np : "<< Np << endl;
 			    } else printf("%soption Np : %d%s\n", KNRM, Np, KRED);
-
 			    break;
 			case 'v':
 			    verbose = 1;
@@ -173,6 +174,8 @@ int main(int argc, char* argv[])
 	}
 
 
+
+
 	auto start = chrono::high_resolution_clock::now();
 
 
@@ -217,7 +220,7 @@ int main(int argc, char* argv[])
 					// -------------- on a une trame ads-b -----------------
 					k+=479;
 					Decodage* decode = new Decodage();
-					decode->decodage(nouvel, s, aff_trame, trame, liste_avion);
+					decode->decodage(s, aff_trame, trame, liste_avion);
 					adsb ++;
 					bonftc += decode->get_bonftc();
 					boncrc += decode->get_boncrc();
@@ -228,7 +231,7 @@ int main(int argc, char* argv[])
 			}
 			k++;
 		}
-
+		// ============== affichage resultats partiels ================
 		auto np2 = chrono::high_resolution_clock::now();
 
 		if (verbose && !fichier) {
@@ -246,7 +249,7 @@ int main(int argc, char* argv[])
 		adsb = 0;
 		bonftc = 0;
 		boncrc = 0;
-	} //for np
+	}
 
 
 	// =============== AFFICHAGE FINAL =====================

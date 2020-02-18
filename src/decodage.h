@@ -1,3 +1,6 @@
+#ifndef DECODAGE
+#define DECODAGE
+
 #include <iostream>
 #include <cstdio>
 #include <cstdlib>
@@ -117,7 +120,7 @@ private :
 public :
 	Decodage();
 	~Decodage();
-    float decodage(int nouvel, float s, int aff_trame, int trame[120], Liste_Avion* liste_avion);
+    float decodage(float s, int aff_trame, int trame[120], Liste_Avion* liste_avion);
     int get_bonftc();
     int get_boncrc();
 };
@@ -142,7 +145,7 @@ int Decodage::get_boncrc(){
     return  boncrc;
 }
 
-float Decodage::decodage(int nouvel, float s, int aff_trame, int trame[120], Liste_Avion* liste_avion){
+float Decodage::decodage(float s, int aff_trame, int trame[120], Liste_Avion* liste_avion){
 	Avion *plane = new Avion(0);
     // -------------- on a une trame ads-b -----------------
 
@@ -352,3 +355,5 @@ float Decodage::decodage(int nouvel, float s, int aff_trame, int trame[120], Lis
         else (*liste_avion).update(nouvel, *plane);
     }
 }	
+
+#endif

@@ -1,3 +1,6 @@
+#ifndef RADIO
+#define RADIO
+
 #include <iostream>
 #include <cstdio>
 #include <cstdlib>
@@ -15,8 +18,8 @@ class Radio{
 private :
 	float fc;
 	float fe;
-	uhd::usrp::multi_usrp::sptr usrp;              // Le pointeur vers l'USRP
     int N;  //nbre ech
+	uhd::usrp::multi_usrp::sptr usrp;              // Le pointeur vers l'USRP
     uhd::rx_streamer::sptr rx_stream;
 
 public :
@@ -73,3 +76,5 @@ void Radio::reset(){
 	rx_stream.reset();
 	usrp.reset();
 }
+
+#endif
