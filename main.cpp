@@ -22,25 +22,9 @@
 #include "detecteur.h"
 #include "decodage.h"
 #include "abs.h"
+#include "couleur.h"
 
 using namespace std;
-
-
-/* =========================== COULEUR TERMINAL =========================*/
-
-#define KNRM  "\x1B[0m"
-#define KRED  "\x1B[31m"
-#define KGRN  "\x1B[32m"
-#define KYEL  "\x1B[33m"
-#define KBLU  "\x1B[34m"
-#define KMAG  "\x1B[35m"
-#define KCYN  "\x1B[36m"
-#define KWHT  "\x1B[37m"
-
-void black();
-void red  (const char* txt);
-void green(const char* txt);
-
 
 /*   ============================== GET NUM =========================== */
 int getnum(char* line, char** real, char** img)
@@ -144,9 +128,9 @@ int main(int argc, char* argv[])
 			    break;
 			case 'f':
 			    fichier = 1;
-				copt = optarg;
+				nom_fichier = optarg;
 				Np = 1;
-				printf("%soption fichier :%s%s\n",KNRM, copt, KRED);
+				printf("%soption fichier :%s%s\n",KNRM, nom_fichier, KRED);
 			    break;
 			case '?':
 			    break;
@@ -176,13 +160,16 @@ int main(int argc, char* argv[])
 	//======================== FICHIER =====================
 	if (fichier){
 		FILE* stream;
-		//if (nom_donne) stream = fopen(copt, "r");
-		/*else*/  stream = fopen(nom_fichier, "r");
-			if (stream == NULL){
-				cout << "erreur fopen" << endl;
-				return 1;
-			} 
-		cout << "fopen" << endl;
+		 stream = fopen(nom_fichier, "r");
+		if (stream == NULL){
+			printf("%s", KRED);
+			cout << "erreur fopen => nom_fichier = ";
+			nom_fichier = "buffers_test.c";
+			cout << nom_fichier << endl;
+			printf("%s", KNRM);
+			stream = fopen(nom_fichier, "r");
+			if (stream == NULL) return 1;
+		}
 		while ( fgets(line, 1024, stream)){
 			getnum(line, &buffer_real, &buffer_imag);
 			breal = strtof(buffer_real, NULL);  //conv char* => float
@@ -190,7 +177,6 @@ int main(int argc, char* argv[])
 			buffer_fichier.push_back(complex<float>(breal, bimag));
 		}
 		fclose(stream);
-		cout << "taille bufer :" << buffer_fichier.size()<< endl;
 	}
 
 
