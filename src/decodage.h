@@ -295,7 +295,7 @@ void Decodage::decodage(float s, int verbose, int aff_trame, int trame[120], Lis
                     plane->set_latitude(latitude);
                     bonftc++;
                 } else {
-                        if (ftc == 19) {
+                    if (ftc == 19) {
                         // =============== vitesse ==================
                         if(aff_trame) cout << "---- vitesse ----" << "         ";
                         /*cf https://mode-s.org/decode/adsb.html
@@ -346,7 +346,10 @@ void Decodage::decodage(float s, int verbose, int aff_trame, int trame[120], Lis
                                 if(aff_trame) cout << "vitesse verticale : " << Vr * 0.3048 << " m/min" << endl;
                             } // if type 3
                         }//if type 1
-                    }// if ftc 4
+                    } else {
+                        // =============== inconnu ==================
+                        cout << "---- ? ----" << endl;
+                    }
                 }// if ftc 3
             }// if ftc 2
         } // if ftc 1
