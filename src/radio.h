@@ -32,7 +32,7 @@ public :
 
 Radio::Radio(){
     fc = 1090e6;
-    fe = 8e6;
+    fe = 4e6;
     N = 200000; //N = 200000 => 50 ms ?
 }
 

@@ -88,7 +88,7 @@ void Avion::print(){
 		printf("  ");
 		for(int i=7; i>0; i--) printf("%c",nom[i]);
 		printf("   ");
-		printf(" %06X", oaci);
+		printf(" %06X    ", oaci);
 	}
 
 	if (altitude != -1) cout << altitude << " pieds	";

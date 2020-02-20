@@ -120,7 +120,7 @@ private :
 public :
 	Decodage();
 	~Decodage();
-    void decodage(float s, int aff_trame, int trame[120], Liste_Avion* liste_avion);
+    void decodage(float s, int verbose, int aff_trame, int trame[120], Liste_Avion* liste_avion);
     int get_bonftc();
     int get_boncrc();
 };
@@ -146,7 +146,7 @@ int Decodage::get_boncrc(){
     return  boncrc;
 }
 
-void Decodage::decodage(float s, int aff_trame, int trame[120], Liste_Avion* liste_avion){
+void Decodage::decodage(float s, int verbose, int aff_trame, int trame[120], Liste_Avion* liste_avion){
 	Avion *plane = new Avion(0);
     // -------------- on a une trame ads-b -----------------
 
@@ -162,7 +162,7 @@ void Decodage::decodage(float s, int aff_trame, int trame[120], Liste_Avion* lis
             cout << "p.s :" << s << "    ";
             printf("OACI : %06X    ", oaci);
             cout << "CRC checked !" << "    ";
-        } else {
+        } else if (verbose) {
             red("\n====== trame ADSB detectée ======\n");
             printf( "%sp.s. :%f    %s", KRED, s, KNRM);
             printf("%sOACI : %06X%s    ", KRED, oaci, KNRM);

@@ -1,6 +1,5 @@
 #include <iostream>
 #include <complex>
-#include <iostream>
 #include <cstdio>
 #include <cstdlib>
 #include <fstream>
@@ -180,8 +179,6 @@ int main(int argc, char* argv[])
 	}
 
 
-
-
 	auto start = chrono::high_resolution_clock::now();
 
 
@@ -225,7 +222,7 @@ int main(int argc, char* argv[])
 						// -------------- on a une trame ads-b -----------------
 						k+=479;
 						Decodage* decode = new Decodage();
-						decode->decodage(s, aff_trame, trame, liste_avion);
+						decode->decodage(s, verbose, aff_trame, trame, liste_avion);
 						adsb ++;
 						bonftc += decode->get_bonftc();
 						boncrc += decode->get_boncrc();
@@ -249,7 +246,7 @@ int main(int argc, char* argv[])
 						if ((trame[8] == 1) &&  (trame[9] == 0) && (trame[10] == 0) && (trame[11] == 0) && (trame[12] == 1)){
 							// -------------- on a une trame ads-b -----------------
 							Decodage* decode = new Decodage();
-							decode->decodage(*(s8 + kk), aff_trame, trame, liste_avion);
+							decode->decodage(*(s8 + kk), verbose,  aff_trame, trame, liste_avion);
 							k+=471;
 							kk = 8;
 							adsb ++;
@@ -307,7 +304,13 @@ int main(int argc, char* argv[])
        		typedef typename ratio_multiply<P,giga>::type TT;
        		cout << fixed << double(TT::num)/TT::den << " ns" << endl;
     	}
+
+
+	
+
 	if (!fichier) radio->reset();
+
+
 
 	return 0;
 }
