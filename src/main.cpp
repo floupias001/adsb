@@ -61,36 +61,40 @@ int main(int argc, char* argv[])
 	int boncrc = 0;
 
 	int c; //getopt
+    float fc = 1090e6;
+    float fe = 4e6;
 	int verbose = 0;
-	int aff_trame = 0;
+	int aff_trame = 1;
 	char* nom_fichier = "buffers_test.c";
 	int fichier = 0;
 	int digit_optind = 0;
 	float ps_min = 0.75;
-	int Np = 1000;
+	int Np = 10000;
 	int huit = 0;
 	static struct option long_options[] = {
 	/*   NAME       ARGUMENT           FLAG  SHORTNAME */
 	{"verbose", no_argument,       NULL, 'v'},  		// affiche temps sur chaque boucle Np + cplx => abs
-	{"trame", no_argument,       NULL, 't'},   		// affiche toutes les trames adsb reçues
+	{"trame", no_argument,       NULL, 't'},   		// DESACTIVE affiche toutes les trames adsb reçues
 	{"produit_scalaire",    required_argument, NULL, 's'}, 	// pour changer la valeur min de la correlation (synchro)
-	{"np",    required_argument, NULL, 'n'}, 		// pour changer le nombre de boucle Np (ie nbre echantillon*200000) // Np = 10 => 0.5 s ?
+	{"np",    required_argument, NULL, 'n'}, 		// pour changer le nombre de boucle Np (ie nbre echantillon*200000) // Np = 10 => 0.5 s 
 	{"huit", no_argument, NULL, '8'},  // detecteur8par8
-	{"fichier", required_argument,     NULL, 'f'},
+	{"fichier", required_argument,     NULL, 'f'}, // a paritr d'un fichier 
+	{"fc", required_argument,     NULL, 'a'}, // changer la frequence de la porteuse
+	{"fe", required_argument,     NULL, 'b'}, // changer la frequence echantillonnage
 	{NULL,      0,                 NULL, 0}
 	};
 	int option_index = 0;
 
 	Detecteur* detecteur = new Detecteur();
 	Detecteur8par8* detecteur8par8 = new Detecteur8par8();
-	Radio* radio = new Radio();
 	vector<complex<float> > buffer(200000); // Notre buffer à nous dans le programme
 	vector<complex<float> > buffer_fichier;
 
+	cout << "par Florian LOUPIAS - Février 2020" << endl;
 	cout << "==================================== ADSB ====================================" << endl;
 	// ============== GETOPT ================
 	printf("%s",KRED);
-	while ((c = getopt_long(argc, argv, "f:n:s:vt8",long_options, &option_index)) != -1) {
+	while ((c = getopt_long(argc, argv, "a:b:f:n:s:vt8",long_options, &option_index)) != -1) {
 		int this_option_optind = optind ? optind : 1;
 		switch (c) {
 			case 0:
@@ -99,6 +103,14 @@ int main(int argc, char* argv[])
 				printf ("%s with arg %s%s", optarg, KNRM, KRED);
 			    printf ("\n");
 			    break;
+			case 'a':
+				fc = atof(optarg);
+				printf("%soption fc = %f Hz%s\n", KNRM, fc, KRED);
+				break;
+			case 'b' :
+				fe = atof(optarg);
+				printf("%soption fe = %f Hz%s\n", KNRM, fe, KRED);
+				break;
 			case 's':
 		        ps_min = atof(optarg);
 			    if ((ps_min > 1) || (ps_min < 0)){
@@ -120,8 +132,8 @@ int main(int argc, char* argv[])
 				printf("%soption verbose%s\n", KNRM, KRED);
 			    break;
 			case 't':
-			    aff_trame = 1;
-				printf("%soption trame%s\n", KNRM, KRED);
+			    aff_trame = 0;
+				printf("%soption trame : pas d'affichage%s\n", KNRM, KRED);
 			    break;
 			case 'f':
 			    fichier = 1;
@@ -150,6 +162,7 @@ int main(int argc, char* argv[])
 
 
 	//=============== INITIALISATION RADIO ================
+	Radio* radio = new Radio(fc, fe);
 	if (!fichier){
 		radio->initialize(); 
 		cout << "Temps estimé : " << Np/20 << " s   soit " << (float)Np/20/60 << " min"<< endl << endl; 

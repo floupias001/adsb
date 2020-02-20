@@ -23,17 +23,18 @@ private :
     uhd::rx_streamer::sptr rx_stream;
 
 public :
-	Radio();
+	Radio( float s_fc, float s_fe);
 	~Radio();
     void initialize();
     void reception(vector<complex<float> >* buffer);
     void reset();
 };
 
-Radio::Radio(){
-    fc = 1090e6;
-    fe = 4e6;
-    N = 200000; //N = 200000 => 50 ms ?
+
+Radio::Radio(float s_fc, float s_fe){
+    fc = s_fc;
+    fe = s_fe;
+    N = 200000; //N = 200000 => 50 ms
 }
 
 Radio::~Radio(){}
