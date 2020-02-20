@@ -5,6 +5,7 @@
 #include <iostream>
 #include <cstdio>
 #include <cstdlib>
+#include <math.h>
 
 using namespace std;
 
@@ -92,16 +93,23 @@ void Avion::print(){
 	}
 
 	if (altitude != -1) cout << altitude << " pieds	";
-	if (altitude == -1) cout <<"	";
+	else cout <<"	";
 	if (latitude != -1) cout <<latitude << "		";
-	if (latitude == -1) cout <<"		";
+	else cout <<"		";
 	if (longitude != -1) printf( "%*f	", 6, longitude);
-	if (longitude == -1) cout <<"				";
+	else cout <<"				";
 	if (vit_hor != -1) cout << vit_hor << " km/h		";
-	if (vit_hor == -1) cout <<"	";
+	else cout <<"	             ";
 	if (angle != -1) cout << angle << " °		";
-	if (angle == -1) cout <<"	";
-	if (vit_vert != -1) cout << vit_vert << " m/min";
+	else cout <<"	    	";
+	if (vit_vert != -1) cout << vit_vert << " m/min       ";
+	else cout << "                                ";
+	if (latitude != -1 && longitude != -1){
+
+		float a = cos((latitude + 44.806884)/2) * (longitude + 0.606629);
+		float b = latitude - 44.806884;
+		cout << 1.852*60*sqrt(a*a+b*b) << " km";
+	} 
 	cout << endl << endl;
 }
 

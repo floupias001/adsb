@@ -27,6 +27,8 @@ cstdio
 -
 cstdlib
 -
+math.h
+-
 
 /home/floupias/ADSB/adsb/src/couleur.h
 iostream

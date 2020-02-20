@@ -59,7 +59,7 @@ void Liste_Avion::update(int num, Avion avion){
 
 void Liste_Avion::print(){
 	map<int, int>::iterator it = cle.begin();
-	cout << "   NOM    |  @ OACI  |   ALTITUDE   |   LATITUDE   |   LONGITUDE   |   VITESSE HORIZONTALE   |    ANGLE    |  VITESSE VERTICALE" << endl;
+	cout << "   NOM    |  @ OACI  |   ALTITUDE   |   LATITUDE   |   LONGITUDE   |   VITESSE HORIZONTALE   |    ANGLE    |  VITESSE VERTICALE   | DISTANCE" << endl;
 	while ( it != cle.end()){
 		(liste[it->second]).print();
 		it ++;	
