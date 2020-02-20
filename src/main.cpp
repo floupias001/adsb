@@ -311,7 +311,8 @@ int main(int argc, char* argv[])
 	cout << "\nnombre total de trames ads-b avec bon crc : "<< boncrctotal << endl;
 	cout << "\nnombre total de trames ads-b avec bon ftc : "<< bonftctotal << endl;
 
-	cout << "\n\nTemps total : " << chrono::duration_cast<chrono::seconds>(end - start).count() << " s" << endl;
+	if (fichier) cout << "\n\nTemps total : " << chrono::duration_cast<chrono::microseconds>(end - start).count() << " us" << endl;
+	else cout << "\n\nTemps total : " << chrono::duration_cast<chrono::seconds>(end - start).count() << " s" << endl;
  	cout << "- precision: ";
     	typedef typename std::chrono::high_resolution_clock::period P;// type of time unit
    	if (ratio_less_equal<P,nano>::value) {

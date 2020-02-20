@@ -93,17 +93,17 @@ void Avion::print(){
 	}
 
 	if (altitude != -1) cout << altitude << " pieds	";
-	else cout <<"	";
+	else cout <<"\033[11C";
 	if (latitude != -1) cout <<latitude << "		";
-	else cout <<"		";
+	else cout <<"\033[20C";
 	if (longitude != -1) printf( "%*f	", 6, longitude);
-	else cout <<"				";
+	else cout <<"\033[20C";
 	if (vit_hor != -1) cout << vit_hor << " km/h		";
-	else cout <<"	             ";
-	if (angle != -1) cout << angle << " °		";
-	else cout <<"	    	";
+	else cout <<"\033[25C";
+	if (angle != -1) cout << angle << " °           ";
+	else cout <<"\033[10C";
 	if (vit_vert != -1) cout << vit_vert << " m/min       ";
-	else cout << "                                ";
+	else cout << "\033[25C";
 	if (latitude != -1 && longitude != -1){
 
 		float a = cos((latitude + 44.806884)/2) * (longitude + 0.606629);

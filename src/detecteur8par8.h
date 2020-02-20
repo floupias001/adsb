@@ -36,18 +36,20 @@ void Detecteur8par8::detection(float* ps, float *buffer){
 	__m256 v_ps2 = _mm256_loadu_ps(buffer); //[0]
     __m256 v_ps = _mm256_loadu_ps(buffer + 1); //[1]
     v_ps2 = _mm256_add_ps(v_ps2, v_ps);
-    v_ps = _mm256_loadu_ps(buffer + 3); //[3]
-    v_ps2 = _mm256_add_ps(v_ps2, v_ps);
-    v_ps = _mm256_loadu_ps(buffer + 4); //[4]
-    v_ps2 = _mm256_add_ps(v_ps2, v_ps);
-    v_ps = _mm256_loadu_ps(buffer + 14); //[14]
-    v_ps2 = _mm256_add_ps(v_ps2, v_ps);
-    v_ps = _mm256_loadu_ps(buffer + 15); //[15]
-    v_ps2 = _mm256_add_ps(v_ps2, v_ps);
-    v_ps = _mm256_loadu_ps(buffer + 18); //[18]
-    v_ps2 = _mm256_add_ps(v_ps2, v_ps);
-    v_ps = _mm256_loadu_ps(buffer + 19); //[19]
-    v_ps2 = _mm256_add_ps(v_ps2, v_ps);
+    __m256 v_ps3 = _mm256_loadu_ps(buffer + 3); //[3]
+    __m256 v_ps4 = _mm256_loadu_ps(buffer + 4); //[4]
+    v_ps3 = _mm256_add_ps(v_ps3, v_ps4);
+    v_ps2 = _mm256_add_ps(v_ps3, v_ps2);
+
+    v_ps3 = _mm256_loadu_ps(buffer + 14); //[14]
+    v_ps4 = _mm256_loadu_ps(buffer + 15); //[15]
+    v_ps3 = _mm256_add_ps(v_ps3, v_ps4);
+    v_ps2 = _mm256_add_ps(v_ps2, v_ps3);
+
+    v_ps3 = _mm256_loadu_ps(buffer + 18); //[18]
+    v_ps4 = _mm256_loadu_ps(buffer + 19); //[19]
+    v_ps3 = _mm256_add_ps(v_ps3, v_ps4);
+    v_ps2 = _mm256_add_ps(v_ps2, v_ps3);
 	/* AVX
 	carre des elmts
 	add
@@ -60,18 +62,28 @@ void Detecteur8par8::detection(float* ps, float *buffer){
     div
 	*/
     
-	__m256 v_buf1 = _mm256_loadu_ps(buffer); //[0]
-	v_buf1 =  _mm256_mul_ps(v_buf1, v_buf1); 
-    for (int k=1; k<32; k++) {
+    __m256 v_buf6;
+    __m256 v_buf7;
+    __m256 v_buf8;
+	__m256 v_buf1;
+    for (int k=0; k<32; k = k+4) {
         __m256 v_buf2 = _mm256_loadu_ps((buffer + k)); //[k]
         v_buf2 =  _mm256_mul_ps(v_buf2, v_buf2);
         v_buf1 = _mm256_add_ps(v_buf1, v_buf2);
+        __m256 v_buf3 = _mm256_loadu_ps((buffer + k + 1)); //[k + 1]
+        v_buf3 =  _mm256_mul_ps(v_buf3, v_buf3);
+        v_buf6 = _mm256_add_ps(v_buf6, v_buf3);
+        __m256 v_buf4 = _mm256_loadu_ps((buffer + k + 2)); //[k + 2]
+        v_buf4 =  _mm256_mul_ps(v_buf4, v_buf4);
+        v_buf7 = _mm256_add_ps(v_buf7, v_buf4);
+        __m256 v_buf5 = _mm256_loadu_ps((buffer + k + 3)); //[k + 3]
+        v_buf5 =  _mm256_mul_ps(v_buf5, v_buf5);
+        v_buf8 = _mm256_add_ps(v_buf8, v_buf5);
     }
-    __attribute__ ((aligned (16))) float huit[8] = {8, 8, 8, 8, 8, 8, 8, 8};
-    __m256 v_huit = _mm256_load_ps(huit);
-    //__m256i v_buf3 = _mm256_cvtps_epi32 (v_buf1);
-    //v_buf3 = _mm256_slli_epi32(v_buf3, 2); //x8
-    //v_buf1 = _mm256_cvtepi32_ps (v_buf3);
+    v_buf6 = _mm256_add_ps(v_buf6, v_buf7);
+    v_buf1 = _mm256_add_ps(v_buf8, v_buf1);
+    v_buf1 = _mm256_add_ps(v_buf1, v_buf6);
+    __m256 v_huit = _mm256_set1_ps(8);
     v_buf1 = _mm256_mul_ps(v_buf1, v_huit); //x8
     v_buf1 = _mm256_sqrt_ps(v_buf1); //sqrt
 

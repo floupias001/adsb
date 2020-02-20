@@ -13,7 +13,7 @@ options :
           -t ou --trame                              => desactive affichage trame recues   
           -a ou --fc {float}                         => change la frequence de la porteuse (default : 1090e6)  
           -b ou --fe {float}                         => change la frequence d'echantillonnage (default : 4e6)   
-          -8 ou --huit                               => detection differente   
+          -8 ou --huit                               => detection plus rapide  
 
 
 carte :         
