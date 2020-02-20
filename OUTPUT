@@ -1,0 +1,95 @@
+floupias@t1700dd4:~/ADSB/adsb/build$ ./adsb -n 10000 -t
+linux; GNU C++ version 5.3.1 20151219; Boost_105800; UHD_003.009.002-0-unknown
+
+==================================== ADSB ====================================
+option Np : 10000
+option trame
+
+-- USRP-B100 clock control: 10
+--   r_counter: 2
+--   a_counter: 0
+--   b_counter: 20
+--   prescaler: 8
+--   vco_divider: 5
+--   chan_divider: 5
+--   vco_rate: 1600.000000MHz
+--   chan_rate: 320.000000MHz
+--   out_rate: 64.000000MHz
+-- 
+
+UHD Warning:
+    Unable to set the thread priority. Performance may be negatively affected.
+    Please see the general application notes in the manual for instructions.
+    EnvironmentError: OSError: error in pthread_setschedparam
+ --------------------------------------------------
+ Sampling Rate set to: 4e+06
+ Central Frequency set to: 1.09e+09
+ --------------------------------------------------
+Temps estimé : 500 s   soit 8.33333 min
+
+Ecoute en cours ...
+
+10%
+
+20%
+
+30%
+
+40%
+
+50%
+
+====== trame ADSB detectée ======
+p.s :0.785414    OACI : 346041    CRC checked !    NOUVEL AVION    ftc :19    ---- vitesse ----         vitesse horizontale : 830.693 km/h    angle : -146.788 °    vitesse verticale : -19 m/min
+
+====== trame ADSB detectée ======
+p.s :0.869312    OACI : 346041    CRC checked !                    ftc :11    ---- position air ----    altitude  : 35200 pieds    latitude  : 44.6428    longitude : -0.553589
+
+====== trame ADSB detectée ======
+p.s :0.759044    OACI : 346041    CRC checked !                    ftc :19    ---- vitesse ----         vitesse horizontale : 830.693 km/h    angle : -146.788 °    vitesse verticale : -19 m/min
+
+====== trame ADSB detectée ======
+p.s :0.812925    OACI : 346041    CRC checked !                    ftc :19    ---- vitesse ----         vitesse horizontale : 830.693 km/h    angle : -146.788 °    vitesse verticale : -19 m/min
+
+====== trame ADSB detectée ======
+p.s :0.753328    OACI : 346041    CRC checked !                    ftc :19    ---- vitesse ----         vitesse horizontale : 830.693 km/h    angle : -146.788 °    vitesse verticale : -19 m/min
+
+60%
+
+70%
+
+====== trame ADSB detectée ======
+p.s :0.802399    OACI : 020017    CRC checked !    NOUVEL AVION    ftc :29    
+====== trame ADSB detectée ======
+p.s :0.775796    OACI : 020017    CRC checked !                    ftc :4    ---- identification ----   nom : RAM761R
+
+80%
+
+====== trame ADSB detectée ======
+p.s :0.808738    OACI : 020017    CRC checked !                    ftc :11    ---- position air ----    altitude  : 37200 pieds    latitude  : 44.5485    longitude : -0.460022
+
+====== trame ADSB detectée ======
+p.s :0.781357    OACI : 020017    CRC checked !                    ftc :19    ---- vitesse ----         vitesse horizontale : 827.063 km/h    angle : -154.581 °    vitesse verticale : -19 m/min
+
+90%
+
+================================================================
+liste des avions :
+   NOM    |  @ OACI  |   ALTITUDE   |   LATITUDE   |   LONGITUDE   |   VITESSE HORIZONTALE   |    ANGLE    |  VITESSE VERTICALE
+  RAM761R    020017    37200 pieds	44.5485		-0.460022	827.063 km/h		-154.581 °		-19 m/min
+
+  XXXXXXX    346041    35200 pieds	44.6428		-0.553589	830.693 km/h		-146.788 °		-19 m/min
+
+
+nombre total de trames : 9900
+
+nombre total de trames ads-b : 326
+
+nombre total de trames ads-b avec bon crc : 9
+
+nombre total de trames ads-b avec bon ftc : 8
+
+
+Temps total : 500 s
+- precision: 1.000000 ns
+

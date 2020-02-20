@@ -67,7 +67,7 @@ int main(int argc, char* argv[])
 	int fichier = 0;
 	int digit_optind = 0;
 	float ps_min = 0.75;
-	int Np = 100;
+	int Np = 1000;
 	int huit = 0;
 	static struct option long_options[] = {
 	/*   NAME       ARGUMENT           FLAG  SHORTNAME */
@@ -152,7 +152,7 @@ int main(int argc, char* argv[])
 	//=============== INITIALISATION RADIO ================
 	if (!fichier){
 		radio->initialize(); 
-		cout << "Temps estimé : " << Np*5/200 << " s   soit " << (float)Np*5/200/60 << " min"<< endl << endl; 
+		cout << "Temps estimé : " << Np/20 << " s   soit " << (float)Np/20/60 << " min"<< endl << endl; 
 		printf("Ecoute en cours ...\n");
 	}
 	//=============== INITIALISATION FICHIER ================
