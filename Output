@@ -1,10 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-floupias@t1700dd4:~/ADSB/adsb/build$ ./adsb -n 10000 -t
+floupias@t1700dd4:~/ADSB/adsb/build$ ./adsb -n 20000 -t
 linux; GNU C++ version 5.3.1 20151219; Boost_105800; UHD_003.009.002-0-unknown
 
 ==================================== ADSB ====================================
-option Np : 10000
+option Np : 20000
 option trame
 
 -- USRP-B100 clock control: 10
@@ -27,7 +25,7 @@ UHD Warning:
  Sampling Rate set to: 4e+06
  Central Frequency set to: 1.09e+09
  --------------------------------------------------
-Temps estimé : 500 s   soit 8.33333 min
+Temps estimé : 1000 s   soit 16.6667 min
 
 Ecoute en cours ...
 
@@ -35,65 +33,139 @@ Ecoute en cours ...
 
 20%
 
+====== trame ADSB detectée ======
+p.s :0.768515    OACI : 4D223E    CRC checked !    NOUVEL AVION    ftc :29    
+====== trame ADSB detectée ======
+p.s :0.786026    OACI : 4D223E    CRC checked !                    ftc :19    ---- vitesse ----         vitesse horizontale : 869.304 km/h    angle : -144.646 °    vitesse verticale : 19 m/min
+
+====== trame ADSB detectée ======
+p.s :0.792436    OACI : 4D223E    CRC checked !                    ftc :11    ---- position air ----    altitude  : 31200 pieds    latitude  : 43.8817    longitude : -0.483826
+
+====== trame ADSB detectée ======
+p.s :0.751837    OACI : 4D223E    CRC checked !                    ftc :29    
+====== trame ADSB detectée ======
+p.s :0.78259    OACI : 4D223E    CRC checked !                    ftc :19    ---- vitesse ----         vitesse horizontale : 870.936 km/h    angle : -144.722 °    vitesse verticale : 19 m/min
+
+====== trame ADSB detectée ======
+p.s :0.770145    OACI : 4D223E    CRC checked !                    ftc :11    ---- position air ----    altitude  : 31200 pieds    latitude  : 43.8802    longitude : -0.485291
+
+====== trame ADSB detectée ======
+p.s :0.795464    OACI : 4D223E    CRC checked !                    ftc :31    
 30%
 
 40%
 
+====== trame ADSB detectée ======
+p.s :0.821496    OACI : 3C56EB    CRC checked !    NOUVEL AVION    ftc :19    ---- vitesse ----         vitesse horizontale : 822.899 km/h    angle : -148.415 °    vitesse verticale : -19 m/min
+
+====== trame ADSB detectée ======
+p.s :0.782902    OACI : 3C56EB    CRC checked !                    ftc :29    
+====== trame ADSB detectée ======
+p.s :0.79163    OACI : 3C56EB    CRC checked !                    ftc :11    ---- position air ----    altitude  : 35200 pieds    latitude  : 43.9534    longitude : -0.559875
+
+====== trame ADSB detectée ======
+p.s :0.804109    OACI : 3C56EB    CRC checked !                    ftc :19    ---- vitesse ----         vitesse horizontale : 822.899 km/h    angle : -148.415 °    vitesse verticale : -19 m/min
+
 50%
 
 ====== trame ADSB detectée ======
-p.s :0.785414    OACI : 346041    CRC checked !    NOUVEL AVION    ftc :19    ---- vitesse ----         vitesse horizontale : 830.693 km/h    angle : -146.788 °    vitesse verticale : -19 m/min
+p.s :0.776527    OACI : 3C56EB    CRC checked !                    ftc :11    ---- position air ----    altitude  : 35200 pieds    latitude  : 43.897    longitude : -0.604736
 
 ====== trame ADSB detectée ======
-p.s :0.869312    OACI : 346041    CRC checked !                    ftc :11    ---- position air ----    altitude  : 35200 pieds    latitude  : 44.6428    longitude : -0.553589
-
-====== trame ADSB detectée ======
-p.s :0.759044    OACI : 346041    CRC checked !                    ftc :19    ---- vitesse ----         vitesse horizontale : 830.693 km/h    angle : -146.788 °    vitesse verticale : -19 m/min
-
-====== trame ADSB detectée ======
-p.s :0.812925    OACI : 346041    CRC checked !                    ftc :19    ---- vitesse ----         vitesse horizontale : 830.693 km/h    angle : -146.788 °    vitesse verticale : -19 m/min
-
-====== trame ADSB detectée ======
-p.s :0.753328    OACI : 346041    CRC checked !                    ftc :19    ---- vitesse ----         vitesse horizontale : 830.693 km/h    angle : -146.788 °    vitesse verticale : -19 m/min
+p.s :0.750344    OACI : 3C6426    CRC checked !    NOUVEL AVION    ftc :11    ---- position air ----    altitude  : 33200 pieds    latitude  : 44.7404    longitude : -0.421631
 
 60%
+
+====== trame ADSB detectée ======
+p.s :0.778496    OACI : 40756F    CRC checked !    NOUVEL AVION    ftc :19    ---- vitesse ----         vitesse horizontale : 295.584 km/h    angle : -134.452 °    vitesse verticale : -214 m/min
+
+====== trame ADSB detectée ======
+p.s :0.819412    OACI : 40756F    CRC checked !                    ftc :11    ---- position air ----    altitude  : 1200 pieds    latitude  : 44.1373    longitude : -0.577759
+
+====== trame ADSB detectée ======
+p.s :0.816916    OACI : 40756F    CRC checked !                    ftc :19    ---- vitesse ----         vitesse horizontale : 295.584 km/h    angle : -134.452 °    vitesse verticale : -214 m/min
+
+====== trame ADSB detectée ======
+p.s :0.770204    OACI : 40756F    CRC checked !                    ftc :19    ---- vitesse ----         vitesse horizontale : 292.756 km/h    angle : -134.446 °    vitesse verticale : -214 m/min
+
+====== trame ADSB detectée ======
+p.s :0.826316    OACI : 40756F    CRC checked !                    ftc :29    
+====== trame ADSB detectée ======
+p.s :0.811738    OACI : 40756F    CRC checked !                    ftc :19    ---- vitesse ----         vitesse horizontale : 284.271 km/h    angle : -134.43 °    vitesse verticale : -136 m/min
+
+====== trame ADSB detectée ======
+p.s :0.774829    OACI : 40756F    CRC checked !                    ftc :11    ---- position air ----    altitude  : 1225 pieds    latitude  : 44.134    longitude : -0.582214
+
+====== trame ADSB detectée ======
+p.s :0.758172    OACI : 3C6426    CRC checked !                    ftc :19    ---- vitesse ----         vitesse horizontale : 838.638 km/h    angle : -148.755 °    vitesse verticale : 19 m/min
+
+====== trame ADSB detectée ======
+p.s :0.779419    OACI : 3C6426    CRC checked !                    ftc :11    ---- position air ----    altitude  : 33200 pieds    latitude  : 44.7155    longitude : -0.441467
+
+====== trame ADSB detectée ======
+p.s :0.783595    OACI : 3C6426    CRC checked !                    ftc :11    ---- position air ----    altitude  : 33200 pieds    latitude  : 43.949    longitude : -0.447693
+
+====== trame ADSB detectée ======
+p.s :0.751236    OACI : 3C6426    CRC checked !                    ftc :11    ---- position air ----    altitude  : 33200 pieds    latitude  : 43.9459    longitude : -0.450195
+
+====== trame ADSB detectée ======
+p.s :0.79784    OACI : 3C6426    CRC checked !                    ftc :11    ---- position air ----    altitude  : 33200 pieds    latitude  : 44.689    longitude : -0.462585
 
 70%
 
 ====== trame ADSB detectée ======
-p.s :0.802399    OACI : 020017    CRC checked !    NOUVEL AVION    ftc :29    
-====== trame ADSB detectée ======
-p.s :0.775796    OACI : 020017    CRC checked !                    ftc :4    ---- identification ----   nom : RAM761R
-
+p.s :0.82651    OACI : 485A32    CRC checked !    NOUVEL AVION    ftc :29    
 80%
 
 ====== trame ADSB detectée ======
-p.s :0.808738    OACI : 020017    CRC checked !                    ftc :11    ---- position air ----    altitude  : 37200 pieds    latitude  : 44.5485    longitude : -0.460022
+p.s :0.832552    OACI : 485A32    CRC checked !                    ftc :19    ---- vitesse ----         vitesse horizontale : 999.189 km/h    angle : 20.3211 °    vitesse verticale : 19 m/min
 
 ====== trame ADSB detectée ======
-p.s :0.781357    OACI : 020017    CRC checked !                    ftc :19    ---- vitesse ----         vitesse horizontale : 827.063 km/h    angle : -154.581 °    vitesse verticale : -19 m/min
+p.s :0.776958    OACI : 485A32    CRC checked !                    ftc :11    ---- position air ----    altitude  : 28000 pieds    latitude  : 44.6694    longitude : -0.55835
+
+====== trame ADSB detectée ======
+p.s :0.783274    OACI : 485A32    CRC checked !                    ftc :19    ---- vitesse ----         vitesse horizontale : 999.189 km/h    angle : 20.3211 °    vitesse verticale : 19 m/min
+
+====== trame ADSB detectée ======
+p.s :0.785934    OACI : 485A32    CRC checked !                    ftc :29    
+====== trame ADSB detectée ======
+p.s :0.764529    OACI : 485A32    CRC checked !                    ftc :19    ---- vitesse ----         vitesse horizontale : 999.189 km/h    angle : 20.3211 °    vitesse verticale : -19 m/min
+
+====== trame ADSB detectée ======
+p.s :0.756047    OACI : 485A32    CRC checked !                    ftc :11    ---- position air ----    altitude  : 28000 pieds    latitude  : 44.7335    longitude : -0.527405
 
 90%
+
+====== trame ADSB detectée ======
+p.s :0.761927    OACI : 3944F3    CRC checked !    NOUVEL AVION    ftc :19    ---- vitesse ----         vitesse horizontale : 806.892 km/h    angle : -145.502 °    vitesse verticale : -19 m/min
+
+====== trame ADSB detectée ======
+p.s :0.760322    OACI : 3944F3    CRC checked !                    ftc :19    ---- vitesse ----         vitesse horizontale : 809.673 km/h    angle : -145.466 °    vitesse verticale : 19 m/min
 
 ================================================================
 liste des avions :
    NOM    |  @ OACI  |   ALTITUDE   |   LATITUDE   |   LONGITUDE   |   VITESSE HORIZONTALE   |    ANGLE    |  VITESSE VERTICALE
-  RAM761R    020017    37200 pieds	44.5485		-0.460022	827.063 km/h		-154.581 °		-19 m/min
+  XXXXXXX    3944F3    							809.673 km/h		-145.466 °		19 m/min
 
-  XXXXXXX    346041    35200 pieds	44.6428		-0.553589	830.693 km/h		-146.788 °		-19 m/min
+  XXXXXXX    3C56EB    35200 pieds	43.897		-0.604736	822.899 km/h		-148.415 °		-19 m/min
+
+  XXXXXXX    3C6426    33200 pieds	44.689		-0.462585	838.638 km/h		-148.755 °		19 m/min
+
+  XXXXXXX    40756F    1225 pieds	44.134		-0.582214	284.271 km/h		-134.43 °		-136 m/min
+
+  XXXXXXX    485A32    28000 pieds	44.7335		-0.527405	999.189 km/h		20.3211 °		-19 m/min
+
+  XXXXXXX    4D223E    31200 pieds	43.8802		-0.485291	870.936 km/h		-144.722 °		19 m/min
 
 
-nombre total de trames : 9900
+nombre total de trames : 19792
 
-nombre total de trames ads-b : 326
+nombre total de trames ads-b : 670
 
-nombre total de trames ads-b avec bon crc : 9
+nombre total de trames ads-b avec bon crc : 34
 
-nombre total de trames ads-b avec bon ftc : 8
+nombre total de trames ads-b avec bon ftc : 27
 
 
-Temps total : 500 s
+Temps total : 1000 s
 - precision: 1.000000 ns
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
