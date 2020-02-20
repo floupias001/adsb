@@ -41,15 +41,16 @@ void Detecteur8par8::detection(float* ps, float *buffer){
     v_ps3 = _mm256_add_ps(v_ps3, v_ps4);
     v_ps2 = _mm256_add_ps(v_ps3, v_ps2);
 
-    v_ps3 = _mm256_loadu_ps(buffer + 14); //[14]
-    v_ps4 = _mm256_loadu_ps(buffer + 15); //[15]
-    v_ps3 = _mm256_add_ps(v_ps3, v_ps4);
-    v_ps2 = _mm256_add_ps(v_ps2, v_ps3);
+    __m256 v_ps5 = _mm256_loadu_ps(buffer + 14); //[14]
+    __m256 v_ps6 = _mm256_loadu_ps(buffer + 15); //[15]
+    v_ps5 = _mm256_add_ps(v_ps5, v_ps6);
 
-    v_ps3 = _mm256_loadu_ps(buffer + 18); //[18]
-    v_ps4 = _mm256_loadu_ps(buffer + 19); //[19]
-    v_ps3 = _mm256_add_ps(v_ps3, v_ps4);
-    v_ps2 = _mm256_add_ps(v_ps2, v_ps3);
+    __m256 v_ps7 = _mm256_loadu_ps(buffer + 18); //[18]
+    __m256 v_ps8 = _mm256_loadu_ps(buffer + 19); //[19]
+    v_ps7 = _mm256_add_ps(v_ps7, v_ps8);
+    v_ps5 = _mm256_add_ps(v_ps5, v_ps7);
+
+    v_ps2 = _mm256_add_ps(v_ps2, v_ps5);
 	/* AVX
 	carre des elmts
 	add
