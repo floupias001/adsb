@@ -239,6 +239,7 @@ int main(int argc, char* argv[])
 						adsb ++;
 						bonftc += decode->get_bonftc();
 						boncrc += decode->get_boncrc();
+						delete decode;
 					}
 
 					nbtrame++;
@@ -265,6 +266,7 @@ int main(int argc, char* argv[])
 							adsb ++;
 							bonftc += decode->get_bonftc();
 							boncrc += decode->get_boncrc();
+							delete decode;
 						}
 
 						nbtrame++;
@@ -323,7 +325,10 @@ int main(int argc, char* argv[])
 
 	if (!fichier) radio->reset();
 
-
+	delete radio;
+	delete detecteur8par8;
+	delete detecteur;
+	delete liste_avion;
 
 	return 0;
 }

@@ -358,6 +358,8 @@ void Decodage::decodage(float s, int verbose, int aff_trame, int trame[120], Lis
         if (nouvel == -1) (*liste_avion).append(*plane);
         else (*liste_avion).update(nouvel, *plane);
     }
+
+    delete plane;
 }	
 
 #endif
