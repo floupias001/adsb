@@ -61,6 +61,7 @@ int main(int argc, char* argv[])
 	int boncrc = 0;
 
 	int c; //getopt
+	int basique = 0;
     float fc = 1090e6;
     float fe = 4e6;
 	int verbose = 0;
@@ -77,16 +78,15 @@ int main(int argc, char* argv[])
 	{"trame", no_argument,       NULL, 't'},   		// DESACTIVE affiche toutes les trames adsb reçues
 	{"produit_scalaire",    required_argument, NULL, 's'}, 	// pour changer la valeur min de la correlation (synchro)
 	{"np",    required_argument, NULL, 'n'}, 		// pour changer le nombre de boucle Np (ie nbre echantillon*200000) // Np = 10 => 0.5 s 
-	{"huit", no_argument, NULL, '8'},  // detecteur8par8
-	{"fichier", required_argument,     NULL, 'f'}, // a paritr d'un fichier 
-	{"fc", required_argument,     NULL, 'a'}, // changer la frequence de la porteuse
-	{"fe", required_argument,     NULL, 'b'}, // changer la frequence echantillonnage
+	{"huit", no_argument, NULL, '8'},  // detecteur8par8 -- plus rapide
+	{"fichier", required_argument,     NULL, 'f'}, // a partir d'un fichier 
+	{"fc", required_argument,     NULL, 'p'}, // changer la frequence de la porteuse
+	{"fe", required_argument,     NULL, 'e'}, // changer la frequence echantillonnage
+	{"basique", no_argument,     NULL, 'b'}, // detecteur_basique -- plus lent
 	{NULL,      0,                 NULL, 0}
 	};
 	int option_index = 0;
 
-	Detecteur* detecteur = new Detecteur();
-	Detecteur8par8* detecteur8par8 = new Detecteur8par8();
 	vector<complex<float> > buffer(200000); // Notre buffer à nous dans le programme
 	vector<complex<float> > buffer_fichier;
 
@@ -94,7 +94,7 @@ int main(int argc, char* argv[])
 	cout << "==================================== ADSB ====================================" << endl;
 	// ============== GETOPT ================
 	printf("%s",KRED);
-	while ((c = getopt_long(argc, argv, "a:b:f:n:s:vt8",long_options, &option_index)) != -1) {
+	while ((c = getopt_long(argc, argv, "be:p:f:n:s:vt8",long_options, &option_index)) != -1) {
 		int this_option_optind = optind ? optind : 1;
 		switch (c) {
 			case 0:
@@ -103,11 +103,11 @@ int main(int argc, char* argv[])
 				printf ("%s with arg %s%s", optarg, KNRM, KRED);
 			    printf ("\n");
 			    break;
-			case 'a':
+			case 'p':
 				fc = atof(optarg);
 				printf("%soption fc = %f Hz%s\n", KNRM, fc, KRED);
 				break;
-			case 'b' :
+			case 'e' :
 				fe = atof(optarg);
 				printf("%soption fe = %f Hz%s\n", KNRM, fe, KRED);
 				break;
@@ -130,6 +130,10 @@ int main(int argc, char* argv[])
 			case 'v':
 			    verbose = 1;
 				printf("%soption verbose%s\n", KNRM, KRED);
+			    break;
+			case 'b':
+			    basique = 1;
+				printf("%soption basique%s\n", KNRM, KRED);
 			    break;
 			case 't':
 			    aff_trame = 0;
@@ -158,8 +162,8 @@ int main(int argc, char* argv[])
 	printf("%s",KNRM);
 	cout << endl;
 
-
-
+	Detecteur* detecteur = new Detecteur();
+	Detecteur8par8* detecteur8par8 = new Detecteur8par8();
 
 	//=============== INITIALISATION RADIO ================
 	Radio* radio = new Radio(fc, fe);
@@ -221,7 +225,8 @@ int main(int argc, char* argv[])
 			float* addr = buffer_abs.data() + k;
 
 			if (!huit){
-				s = detecteur->detection(addr);
+				if (!basique) s = detecteur->detection(addr);
+				else s = detecteur->detection_basique(addr);
 				if (s > ps_min){ 
 					// -------- on a une trame : ech --------------
 					for (int j=0; j < 480; j = j+4){
