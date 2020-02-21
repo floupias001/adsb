@@ -17,20 +17,23 @@ trame (symb) :
 
 si format = 17 => ADS-B
 
-si ftc = 1, 2, 3, 4 => identification
-data :
-1 - 5 : ftc
-22 : CPR
-23 - 39 : latitude
-40 - 56 : longitude
 
-si ftc = 5, 6, 7, 8 => position surface
+si ftc = 1, 2, 3, 4 => identification
 data :
 1 - 5 : ftc
 9 - 14 : caractere 1
 15 - 20 : caractere 2
 ...
 51 - 56 : caractere 8
+
+
+si ftc = 5, 6, 7, 8 => position surface
+data :
+1 - 5 : ftc
+22 : CPR
+23 - 39 : latitude
+40 - 56 : longitude
+
 
 si ftc =9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 20, 21, 22 => position air
 data :
@@ -39,6 +42,7 @@ data :
 22 : CPR
 23 - 39 : latitude
 40 - 56 : longitude
+
 
 si ftc = 19 => vitesse
 si type = 1 => ground speed

@@ -38,12 +38,12 @@ int cprNL(float x){
 /*   ============================== LATITUDE =========================== */
 float Latitude(int trame[120]){
 	float latref = 44.806884;	//latitude de l'ENSEIRB
-	float Dlat = 360/(4*15 - trame[40 + 21]);
+	float Dlat = 360/(4*15 - trame[39 + 22]);
 	float lat = 0;
 	int jlat = 0;
 	int ref_Dlat = floor(latref/Dlat);
 	for (int q=0; q < 17; q++){
-		lat += trame[40+ 22 +q]*pow(2,16-q);
+		lat += trame[39 + 23 +q]*pow(2,16-q);
 	}
 	lat = lat/131072; // divise par 2^17
 	jlat = ref_Dlat + floor(0.5 + latref/Dlat -ref_Dlat - lat);
@@ -58,14 +58,14 @@ float Longitude(int trame[120], float latitude){
 	float lonref = -0.606629;	//longitude de l'ENSEIRB
 	//cout << "cprNL :" << cprNL(latitude) << endl;
 	float Dlon;
-	int tempNL = cprNL(latitude) - trame[40 + 21];
+	int tempNL = cprNL(latitude) - trame[39 + 22];
 	if ( tempNL != 0) Dlon = 360/tempNL;
 	else Dlon = 360;
 	float lon = 0;
 	int jlon = 0;
 	int ref_Dlon = floor(lonref/Dlon);
 	for (int q=0; q < 17; q++){
-		lon += trame[40+ 39 +q]*pow(2,16-q);
+		lon += trame[39 + 40 +q]*pow(2,16-q);
 	}
 	lon = lon/131072;
 	jlon = ref_Dlon + floor(0.5 + lonref/Dlon -ref_Dlon - lon);
@@ -195,56 +195,56 @@ void Decodage::decodage(float s, int verbose, int aff_trame, int trame[120], Lis
             caractere[7] = 0;
             //caractere 1
             for (int q=0; q < 6; q++){
-                    caractere[7] += trame[40+ 8 +q]*pow(2,5-q);
+                    caractere[7] += trame[39 + 9 +q]*pow(2,5-q);
             }
             if (caractere[7] < 32) caractere[7] += 65 -1;
 
             //caractere 2
             caractere[6] = 0;
             for (int q=0; q < 6; q++){
-                    caractere[6] += trame[40+ 14 +q]*pow(2,5-q);
+                    caractere[6] += trame[39 + 15 +q]*pow(2,5-q);
             }
             if (caractere[6] < 32) caractere[6] +=  65 -1;
 
             //caractere 3
             caractere[5] = 0;
             for (int q=0; q < 6; q++){
-                    caractere[5] += trame[40+ 20 +q]*pow(2,5-q);
+                    caractere[5] += trame[39 + 21 +q]*pow(2,5-q);
             }
             if (caractere[5] < 32) caractere[5] += 65 -1;
 
             //caractere 4
             caractere[4] = 0;
             for (int q=0; q < 6; q++){
-                    caractere[4] += trame[40+ 26 +q]*pow(2,5-q);
+                    caractere[4] += trame[39 + 27 +q]*pow(2,5-q);
             }
             if (caractere[4] < 32) caractere[4] += 65 -1;
 
             //caractere 5
             caractere[3] = 0;
             for (int q=0; q < 6; q++){
-                    caractere[3] += trame[40+ 32 +q]*pow(2,5-q);
+                    caractere[3] += trame[39 + 33 +q]*pow(2,5-q);
             }
             if (caractere[3] < 32) caractere[3] += 65 -1;
 
             //caractere 6
             caractere[2] = 0;
             for (int q=0; q < 6; q++){
-                    caractere[2] += trame[40+ 38 +q]*pow(2,5-q);
+                    caractere[2] += trame[39 + 39 +q]*pow(2,5-q);
             }
             if (caractere[2] < 32) caractere[2] += 65 -1;
 
             //caractere 7
             caractere[1] = 0;
             for (int q=0; q < 6; q++){
-                    caractere[1] += trame[40+ 44 +q]*pow(2,5-q);
+                    caractere[1] += trame[39 + 45 +q]*pow(2,5-q);
             }
             if (caractere[1] < 32) caractere[1] += 65 -1;
 
             //caractere 8
             caractere[0] = 0;
             for (int q=0; q < 6; q++){
-                    caractere[0] += trame[40+ 50 +q]*pow(2,5-q);
+                    caractere[0] += trame[39 + 51 +q]*pow(2,5-q);
             }
             if (caractere[0] < 32) caractere[0] += 65 -1;
 
@@ -279,8 +279,8 @@ void Decodage::decodage(float s, int verbose, int aff_trame, int trame[120], Lis
 
                     //calcul altitude
                     for (int q=0; q < 12; q++){
-                        if(q > 8) altitude += trame[48+q]*pow(2,10-q-1);
-                        else {if(q < 8) altitude += trame[48+q]*pow(2,10-q);}
+                        if(q > 8) altitude += trame[39 + 9 + q]*pow(2,10-q-1);
+                        else {if(q < 8) altitude += trame[39 + 9 + q]*pow(2,10-q);}
                     }
                     altitude = altitude*25 - 1000;
                     if(aff_trame) cout << "altitude  : " << altitude << " pieds" << "    ";
