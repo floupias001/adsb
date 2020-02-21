@@ -1,0 +1,54 @@
+
+cf https://mode-s.org/decode/adsb.html
+
+trame : 480 ech ie 120 symboles
+
+preambule (ech) : 11011000000000110011000000000000
+
+demodulation : 1100 => 1
+               0011 => 0
+
+trame (symb) :
+0 - 7 : preambule
+8 - 12 : format
+16 - 39 : @oaci
+40 - 95 : data
+96 - 119 : crc
+
+si format = 17 => ADS-B
+
+si ftc = 1, 2, 3, 4 => identification
+data :
+1 - 5 : ftc
+22 : CPR
+23 - 39 : latitude
+40 - 56 : longitude
+
+si ftc = 5, 6, 7, 8 => position surface
+data :
+1 - 5 : ftc
+9 - 14 : caractere 1
+15 - 20 : caractere 2
+...
+51 - 56 : caractere 8
+
+si ftc =9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 20, 21, 22 => position air
+data :
+1 - 5 : ftc
+9 - 20 : altitude
+22 : CPR
+23 - 39 : latitude
+40 - 56 : longitude
+
+si ftc = 19 => vitesse
+si type = 1 => ground speed
+si type = 3 => airspeed : pas de vitesse horizontale
+data :
+1 - 5 : ftc
+6 - 8 : type 
+14 : EWsigne
+15 - 25 : EW
+25 : NSsign
+26 - 35 : NS
+37 : Versigne
+38 - 46 : Ver

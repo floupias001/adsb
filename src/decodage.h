@@ -298,12 +298,6 @@ void Decodage::decodage(float s, int verbose, int aff_trame, int trame[120], Lis
                     if (ftc == 19) {
                         // =============== vitesse ==================
                         if(aff_trame) cout << "---- vitesse ----" << "         ";
-                        /*cf https://mode-s.org/decode/adsb.html
-                        VITESSE : si TYPE == 1 (ground speed)
-                        1-5 : FTC	6-8 : TYPE	14 : EWsign	15-24 : EW	25 : NSsign	26-35 : NS	37 : VERsign	38-46 : VER
-                        VITESSE : si TYPE == 3 (airspeed)
-                        1-5 : FTC	6-8 : TYPE									37 : VERsign	38-46 : VER
-                        */
                         bonftc++;
                         if ((trame[39 + 6] == 0) & (trame[39 + 7] == 0) & (trame[39 + 8] == 1)){
                             // Type 1
