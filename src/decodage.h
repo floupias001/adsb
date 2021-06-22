@@ -158,13 +158,15 @@ void Decodage::decodage(float s, int verbose, int aff_trame, int trame[120], Lis
     int crc = CRC(trame);
     if (aff_trame) {
         if (crc){
-            printf("\n====== trame ADSB detectée ======\n");
-            cout << "p.s :" << s << "    ";
+//            printf("\n====== trame ADSB detectée ======\n");
+//            cout << "p.s :" << s << "    ";
+            printf("p.s. = %1.3f  ", s);
             printf("OACI : %06X    ", oaci);
             cout << "CRC checked !" << "    ";
         } else if (verbose) {
-            red("\n====== trame ADSB detectée ======\n");
-            printf( "%sp.s. :%f    %s", KRED, s, KNRM);
+//            red("\n====== trame ADSB detectée ======\n");
+            printf("p.s. = %1.3f  ", s);
+//            printf( "%sp.s. :%f    %s", KRED, s, KNRM);
             printf("%sOACI : %06X%s    ", KRED, oaci, KNRM);
             red("/!/ CRC non checked /!/\n");
             
@@ -259,7 +261,7 @@ void Decodage::decodage(float s, int verbose, int aff_trame, int trame[120], Lis
         }else {
             if (ftc < 9){
                 // =============== position surface =================
-                if(aff_trame) cout << "---- position surface ----" << "    ";
+                if(aff_trame) cout << "-- surface  --" << "    ";
 
                 //calcul latitude et longitude
                 longitude = Longitude(trame,latitude = Latitude(trame));
@@ -275,8 +277,8 @@ void Decodage::decodage(float s, int verbose, int aff_trame, int trame[120], Lis
                 if ((ftc < 23) && (ftc != 19)){
 
                     // =============== position dans l'air ==================
-                    if(aff_trame) cout << "---- position air ----" << "    ";
-
+                    if(aff_trame) cout << "-- position --" << "    ";
+                    
                     //calcul altitude
                     for (int q=0; q < 12; q++){
                         if(q > 8) altitude += trame[39 + 9 + q]*pow(2,10-q-1);
@@ -297,7 +299,9 @@ void Decodage::decodage(float s, int verbose, int aff_trame, int trame[120], Lis
                 } else {
                     if (ftc == 19) {
                         // =============== vitesse ==================
-                        if(aff_trame) cout << "---- vitesse ----" << "         ";
+                        if(aff_trame) cout << "-- vitesse  --" << "    ";
+                        
+                        
                         bonftc++;
                         if ((trame[39 + 6] == 0) & (trame[39 + 7] == 0) & (trame[39 + 8] == 1)){
                             // Type 1
@@ -313,7 +317,7 @@ void Decodage::decodage(float s, int verbose, int aff_trame, int trame[120], Lis
                             float speed = sqrt(vEW*vEW + vNS*vNS);  // en kt ?? plutot en km/h
                             //speed = speed * 1.852;
                             plane->set_vit_hor(speed);
-                            if(aff_trame) cout << "vitesse horizontale : " << speed << " km/h    ";
+                            if(aff_trame) cout << "v. horizontale : " << speed << " km/h    ";
 
                             // angle
                             float angle = atan2(vEW, vNS)*360/(2*PI);
@@ -326,7 +330,7 @@ void Decodage::decodage(float s, int verbose, int aff_trame, int trame[120], Lis
                             Vr = (Vr - 1) *64;
                             if (trame[39 + 37] == 1) Vr = -Vr; // en feet/min
                             Vr = Vr*0.3048;
-                            if(aff_trame) cout << "vitesse verticale : " << Vr << " m/min" << endl;
+                            if(aff_trame) cout << "v. verticale : " << Vr << " m/min" << endl;
                             plane->set_vit_vert(Vr);
 
                         } else {
@@ -337,12 +341,12 @@ void Decodage::decodage(float s, int verbose, int aff_trame, int trame[120], Lis
                                 for (int q=0; q<8; q++) Vr += trame[39 + 38 + q]*pow(2, 8-q );
                                 Vr = (Vr - 1) *64;
                                 if (trame[39 + 37] == 1) Vr = -Vr; // en feet/min
-                                if(aff_trame) cout << "vitesse verticale : " << Vr * 0.3048 << " m/min" << endl;
+                                if(aff_trame) cout << "v. verticale : " << Vr * 0.3048 << " m/min" << endl;
                             } // if type 3
                         }//if type 1
                     } else {
                         // =============== inconnu ==================
-                        cout << "---- ? ----" << endl;
+                        cout << "-- ???????? --" << endl;
                     }
                 }// if ftc 3
             }// if ftc 2
