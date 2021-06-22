@@ -8,7 +8,7 @@ message("${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(CMAKE_CXX_FLAGS "-mavx -mavx2 -O3")
+set(CMAKE_CXX_FLAGS "-march=native -mtune=native -Ofast")
 
 set(SOURCE_FILES
         src/main.cpp)
