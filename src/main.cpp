@@ -70,7 +70,7 @@ int main(int argc, char* argv[])
 	int fichier = 0;
 	int digit_optind = 0;
 	float ps_min = 0.75;
-	int Np = 10000;
+	int Np = 10000000;
 	int huit = 0;
 	static struct option long_options[] = {
 	/*   NAME       ARGUMENT           FLAG  SHORTNAME */
@@ -87,7 +87,7 @@ int main(int argc, char* argv[])
 	};
 	int option_index = 0;
 
-	vector<complex<float> > buffer(200000); // Notre buffer à nous dans le programme
+	vector<complex<float> > buffer(32768); // Notre buffer à nous dans le programme
 	vector<complex<float> > buffer_fichier;
 
 	cout << "par Florian LOUPIAS - Février 2020" << endl;
@@ -199,6 +199,7 @@ int main(int argc, char* argv[])
 	auto start = chrono::high_resolution_clock::now();
 
 
+		
 	for (int np = 0; np < Np; np++)
 	{
 		auto np1 = chrono::high_resolution_clock::now();
@@ -213,8 +214,9 @@ int main(int argc, char* argv[])
 		// =============== TRAITEMENT ================
 
 		// =============== cplx => abs() ==============
-		vector<float> buffer_abs; 
-		if (fichier) cplx2abs(verbose, &buffer_fichier, &buffer_abs);
+
+        vector<float> buffer_abs; 
+    	if (fichier) cplx2abs(verbose, &buffer_fichier, &buffer_abs);
 		else cplx2abs(verbose, &buffer, &buffer_abs);
 
 		// ============== detection & decodage ================
